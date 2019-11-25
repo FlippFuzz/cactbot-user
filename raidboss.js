@@ -383,6 +383,8 @@ Options.Triggers = [
 	  188.0 "Hidden - Disable Left Right Mode"
 	  198.0 "Hidden - Disable Left Right Mode"
 	  212.0 "Hidden - Disable Left Right Mode"
+	  
+	  317.0 "Buster Soon!"
 
 	  537.0 "Hidden - Enable Left Right Mode"
 	  542.0 "Hidden - Enable Left Right Mode"
@@ -391,8 +393,6 @@ Options.Triggers = [
 	  567.0 "Hidden - Disable Left Right Mode"
 	  578.0 "Hidden - Disable Left Right Mode"
 	  588.0 "Hidden - Disable Left Right Mode"
-	  
-      317.0 "Buster Soon!"
     `,
 	timelineTriggers: [
       {
