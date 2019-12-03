@@ -400,17 +400,21 @@ Options.Triggers = [
         regex: /Buster Soon!/,
         alertText: {
           en: 'Buster Soon',
-        },
+        }
+	  },
+	  {
 		id: 'E3S Hidden - Disable Left Right Mode',
         regex: /Hidden - Disable Left Right Mode/,
         run: function(data) {
           data.temporaryCurrentLeftRightMode = false;
-        },
+        }
+	  },
+	  {
 		id: 'E3S Hidden - Enable Left Right Mode',
         regex: /Hidden - Enable Left Right Mode/,
         run: function(data) {
           data.temporaryCurrentLeftRightMode = true;
-        },
+        }
       },
 	],
 	triggers: [
@@ -532,6 +536,57 @@ Options.Triggers = [
 		},
       },
 	]
+  },
+  {
+    zoneRegex: /^Eden's Gate: Sepulture \(Savage\)$/,
+	triggers: [
+      {
+        id: 'E4S - Evil Earth Detection',
+        regex: /.*15:.*:Titan:410C:Evil Earth:E0000000.*44:44:0:0:0:1000:(\d*:\d*):0/,
+		// No idea why, but this function is always triggered 8 times all with the same timestamp and text...
+		// [1/12/2019 10:12:45 am] Info: Replay: BrowserConsole: [23:03:05.691] 15:4000F63A:Titan:410C:Evil Earth:E0000000::0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:::::::::::44:44:0:0:0:1000:115:115:0 (Source: , Line: 545)
+        alertText: function(data, matches) {
+		  //console.log(matches[0]);
+		  data.evilEarth = true;
+		  switch(matches[1]) {
+			case "95:105":  // Verified - 1 Dec 2019, 21:23, 21:45, 21:52
+			case "105:95":  // Verified - 1 Dec 2019, 21:23, 21:45, 21:52
+			case "85:115":  // Verified - 1 Dec 2019, 21:42
+			case "115:85":  // Verified - 1 Dec 2019, 21:42
+			  data.evilEarthSafeSpot = 'Alpha';
+			  break;
+			case "95:95":   // Verified - 1 Dec 2019, 21:56
+			case "105:105": // Verified - 1 Dec 2019, 21:56
+			case "85:85":   // Verified - 1 Dec 2019, 21:14
+			case "115:115": // Verified - 1 Dec 2019, 21:14
+			  data.evilEarthSafeSpot = 'Bravo';
+			  break;
+            default:
+			  data.evilEarthSafeSpot = 'UNKNOWN';
+			  console.log('E4S - Evil Earth Detection - Unknown location ' + matches[0])
+              break;
+		  }
+	      return {
+            en: 'Go to ' + data.evilEarthSafeSpot,
+		   };
+		}
+      },
+      {
+        id: 'E4S - Aftershock',
+        regex: /.* 15:.*:Titan:41B5:Aftershock:E0000000.*44:44:0:0:0:1000:(\d*:\d*):0/,
+        alertText: function(data, matches) {
+		  //console.log(matches[0]);
+	      if(data.evilEarth == true) {
+			if((data.evilEarthSafeSpot == 'Alpha' && matches[1] == '105:105') || (data.evilEarthSafeSpot == 'Bravo' && matches[1] == '95:105')) {
+			  data.evilEarth == false
+	          return {
+                en: 'MOVE!',
+		      };			  
+			}
+		  }
+        },
+      },
+    ],
   }
 ];
 
