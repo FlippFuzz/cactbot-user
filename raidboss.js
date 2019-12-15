@@ -101,6 +101,8 @@ Options.DisabledTriggers = {
   'E3S Front Left Temporary Current 2' : true,
   'E3S Front Right Temporary Current 2' : true,
   'E3S Refreshed' : true,
+  'E4S Massive Landslide - Front' : true,
+  'E4S Massive Landslide - Sides' : true,
 };
 
 
@@ -541,6 +543,7 @@ Options.Triggers = [
     zoneRegex: /^Eden's Gate: Sepulture \(Savage\)$/,
 	triggers: [
       {
+		// Evil Earth Callouts - Part 1
         id: 'E4S - Evil Earth Detection',
         regex: /.*15:.*:Titan:410C:Evil Earth:E0000000.*44:44:0:0:0:1000:(\d*:\d*):0/,
 		// No idea why, but this function is always triggered 8 times all with the same timestamp and text...
@@ -572,6 +575,7 @@ Options.Triggers = [
 		}
       },
       {
+		// Evil Earth Callouts - Part 2
         id: 'E4S - Aftershock',
         regex: /.* 15:.*:Titan:41B5:Aftershock:E0000000.*44:44:0:0:0:1000:(\d*:\d*):0/,
         alertText: function(data, matches) {
@@ -585,6 +589,50 @@ Options.Triggers = [
 			}
 		  }
         },
+      },
+      {
+        id: 'E4S Massive Landslide - Front v2',
+        regex: / 15:\y{ObjectId}:Titan:40E6:Earthen Gauntlets:/,
+        regexCn: / 15:\y{ObjectId}:泰坦:40E6:Earthen Gauntlets:/,
+        regexDe: / 15:\y{ObjectId}:Titan:40E6:Gaia-Armberge:/,
+        regexFr: / 15:\y{ObjectId}:Titan:40E6:Poing Tellurique:/,
+        regexJa: / 15:\y{ObjectId}:タイタン:40E6:大地の手甲:/,
+        alertText: {
+          en: 'Gauntlets: Front',
+        },
+      },
+      {
+        id: 'E4S Massive Landslide - Sides v2',
+        regex: / 15:\y{ObjectId}:Titan:4117:Massive Landslide:/,
+        regexCn: / 15:\y{ObjectId}:泰坦:4117:Massive Landslide:/,
+        regexDe: / 15:\y{ObjectId}:Titan:4117:Gigantischer Bergsturz:/,
+        regexFr: / 15:\y{ObjectId}:Titan:4117:Glissement Apocalyptique:/,
+        regexJa: / 15:\y{ObjectId}:タイタン:4117:メガ・ランドスライド:/,
+        infoText: {
+          en: 'Landslide: Sides',
+        },
+      },
+      {
+        id: 'E4S - Crumbling Down Boulders - Part 1',
+        regex: /.*15:.*:Titan:4110:Seismic Wave/,
+        alertText: function(data, matches) {
+		  //console.log(matches[0]);
+		  data.seismicWave = true;
+	      return {
+            en: 'MOVE!',
+		   };
+		}
+      },
+      {
+        id: 'E4S - Crumbling Down Boulders - Part 2',
+        regex: /.*15:.*:Bomb Boulder:410A:Explosion:E0000000/,
+        alertText: function(data, matches) {
+		  //console.log(matches[0]);
+		  data.seismicWave = false;
+	      return {
+            en: 'MOVE!',
+		   };
+		}
       },
     ],
   }
