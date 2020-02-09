@@ -103,6 +103,7 @@ Options.DisabledTriggers = {
   'E3S Refreshed' : true,
   'E4S Massive Landslide - Front' : true,
   'E4S Massive Landslide - Sides' : true,
+  'E4S Bury Directions' : true
 };
 
 
@@ -613,26 +614,97 @@ Options.Triggers = [
         },
       },
       {
-        id: 'E4S - Crumbling Down Boulders - Part 1',
-        regex: /.*15:.*:Titan:4110:Seismic Wave/,
-        alertText: function(data, matches) {
-		  //console.log(matches[0]);
-		  data.seismicWave = true;
-	      return {
-            en: 'MOVE!',
-		   };
-		}
+        id: 'E4S Tectonic Uplift',
+        regex: Regexes.ability({ id: '4122', source: 'Titan Maximum', capture: false }),
+        infoText: {
+          en: 'Orange Two, Yellow 3',
+        },
       },
-      {
-        id: 'E4S - Crumbling Down Boulders - Part 2',
-        regex: /.*15:.*:Bomb Boulder:410A:Explosion:E0000000/,
+// Fixed in Cactbot 0.15.2
+//	  // Unfortunately, "E4S Bury Directions" is sometimes not triggering.
+//	  // Hoping that this is the issue - reverting cactbot changes for earthen armor detection to v0.14.1's
+//	  {
+//        id: 'E4S Earthen Armor v2',
+//        regex: / 15:\y{ObjectId}:Titan:40E[79]:Earthen Armor:/,
+//        regexCn: / 15:\y{ObjectId}:泰坦:40E[79]:大地之铠:/,
+//        regexDe: / 15:\y{ObjectId}:Titan:40E[79]:Gaia-Panzer:/,
+//        regexFr: / 15:\y{ObjectId}:Titan:40E[79]:Armure Tellurique:/,
+//        regexJa: / 15:\y{ObjectId}:タイタン:40E[79]:大地の鎧:/,
+//        regexKo: / 15:\y{ObjectId}:타이탄:40E[79]:대지의 갑옷:/,
+//        run: function(data) {
+//          data.phase = 'armor';
+//          delete data.printedBury;
+//        },
+//      },
+	  {
+        // Bomb positions are all x = (86 west, 100 mid, 114 east), y = (86, 100, 114).
+        // Note: as these may hit multiple people, there may be multiple lines for the same bomb.
+        id: 'E4S Bury Directions v2',
+        regex: Regexes.abilityFull({ id: '4142', source: 'Bomb Boulder' }),
+        regexDe: Regexes.abilityFull({ id: '4142', source: 'Bomber-Brocken' }),
+        regexFr: Regexes.abilityFull({ id: '4142', source: 'Bombo Rocher' }),
+        regexJa: Regexes.abilityFull({ id: '4142', source: 'ボムボルダー' }),
+        regexCn: Regexes.abilityFull({ id: '4142', source: '爆破岩石' }),
+        regexKo: Regexes.abilityFull({ id: '4142', source: '바위폭탄' }),
+        condition: function(data) {
+          return !data.printedBury;
+        },
+        durationSeconds: 7,
         alertText: function(data, matches) {
-		  //console.log(matches[0]);
-		  data.seismicWave = false;
-	      return {
-            en: 'MOVE!',
-		   };
-		}
+          let x = matches.x;
+          let y = matches.y;
+     
+          if (data.phase == 'armor') {
+            // Three line bombs (middle, e/w, w/e), with seismic wave.
+            if (x < 95) {
+              data.printedBury = true;
+              return {
+                en: 'Bravo TWO Side',
+                de: 'Im Osten vestecken',
+                fr: 'Cachez-vous derrière à l\'est',
+                cn: '右边躲避',
+                ko: '동쪽으로',
+              };
+            } else if (x > 105) {
+              data.printedBury = true;
+              return {
+                en: 'Alpha One Side',
+                de: 'Im Westen vestecken',
+                fr: 'Cachez-vous derrière à l\'ouest',
+                cn: '左边躲避',
+                ko: '서쪽으로',
+              };
+            }
+          } else if (data.phase == 'landslide') {
+            // Landslide cardinals/corners + middle, followed by remaining 4.
+            let xMiddle = x < 105 && x > 95;
+            let yMiddle = y < 105 && y > 95;
+            // Ignore middle point, which may come first.
+            if (xMiddle && yMiddle)
+              return;
+     
+            data.printedBury = true;
+            if (!xMiddle && !yMiddle) {
+              // Corners dropped first.  Cardinals safe.
+              return {
+                en: 'Go Cardinals First',
+                de: 'Zuerst zu den Seiten gehen',
+                fr: 'Allez aux cardinaux en premier',
+                ja: '十字',
+                cn: '十字',
+                ko: '먼저 측면으로 이동',
+              };
+            }
+            // Cardinals dropped first.  Corners safe.
+            return {
+              en: 'Go Corners First',
+              de: 'Zuerst in die Ecken gehen',
+              fr: 'Allez dans les coins en premier',
+              cn: '先去角落',
+              ko: '먼저 코너로 이동',
+            };
+          }
+        },
       },
     ],
   }
