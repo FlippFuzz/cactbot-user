@@ -706,6 +706,28 @@ Options.Triggers = [
           }
         },
       },
+	  {
+        id: 'E4S - Crumbling Down Boulders - Part 1',
+        regex: /.*15:.*:Titan:4110:Seismic Wave/,
+        alertText: function(data, matches) {
+          //console.log(matches[0]);
+          data.seismicWave = true;
+          return {
+            en: 'MOVE!',
+           };
+        }
+	  },
+	  {
+        id: 'E4S - Crumbling Down Boulders - Part 2',
+        regex: /.*15:.*:Bomb Boulder:410A:Explosion:E0000000/,
+		alertText: function(data, matches) {
+		  //console.log(matches[0]);
+          data.seismicWave = false;
+          return {
+            en: 'MOVE!',
+           };
+	    }
+      },
     ],
   }
 ];
