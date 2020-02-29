@@ -729,6 +729,65 @@ Options.Triggers = [
 	    }
       },
     ],
+  },
+  {
+	// E5S
+  	zoneRegex: /^Eden's Verse: Fulmination \(Savage\)$/,
+	timeline: `
+      26.0 "Off Tank 3 Orbs"
+	  53.0 "Everyone 1 Orb"
+	  
+	  75.0 "Tanks and DPS 1 Orb"
+	  
+	  149.0 "Everyone 1 Orb"
+	  
+      183.0 "Off Tank 3 Orbs"
+	  222.0 "Everyone 1 Orb"
+	  
+	  319.0 "Off Tank 3 Orbs"
+	  338.0 "Everyone 1 Orb"
+	  
+	  389.0 "Everyone 1 Orb"
+	  
+	  435.0 "Tanks and DPS 1 Orb"
+    `,
+	timelineTriggers: [
+      {
+        id: 'E5S Off Tank 3 Orbs',
+        regex: /Off Tank 3 Orbs/,
+        alertText: {
+          en: 'Off Tank 3 Orbs',
+        }
+	  },
+	  {
+        id: 'E5S Everyone 1 Orb',
+        regex: /Everyone 1 Orb/,
+        alertText: {
+          en: 'Everyone 1 Orb',
+        }
+	  },
+      {
+        id: 'E5S Tanks and DPS 1 Orb',
+        regex: /Tanks and DPS 1 Orb/,
+        alertText: {
+          en: 'Tanks and DPS 1 Orb',
+        }
+	  }
+	],
+	triggers: [
+      {
+        id: 'E2S Doomvoid Cleaver v2',
+        regex: / 14:3E63:Voidwalker starts using (?:Doomvoid Cleaver|)/,
+        regexDe: / 14:3E63:Nichtswandler starts using (?:Nichtsmarter-Schlachter|)/,
+        regexFr: / 14:3E63:Marcheuse Du Néant starts using (?:Couperet Du Néant Ravageur|)/,
+        regexJa: / 14:3E63:ヴォイドウォーカー starts using (?:ドゥームヴォイド・クリーバー|)/,
+        alertText: {
+          en: 'Clock Positions',
+          fr: 'Position',
+          ja: '散開',
+        },
+      }
+    ]
   }
 ];
 
