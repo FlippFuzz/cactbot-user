@@ -730,26 +730,58 @@ Options.Triggers = [
       },
     ],
   },
+//  {
+//	// Ruby EX
+//  	zoneRegex: /^Cinder Drift \(Extreme\)$/,
+//    triggers: [
+//      {
+//        id: 'RubyEx Optimized Ultima',
+//        regex: Regexes.startsUsing({ source: 'The Ruby Weapon', id: '4ABE', capture: false }),
+//        infoText: function(data) {
+//		}
+//      }
+//    ]
+//  },
   {
 	// E5S
   	zoneRegex: /^Eden's Verse: Fulmination \(Savage\)$/,
 	timeline: `
-      26.0 "Off Tank 3 Orbs"
-	  53.0 "Everyone 1 Orb"
+	  1.0  "NEXT: Rods->Add->Buster"
+      37.0 "Off Tank 3 Orbs"
+	  39.0 "Everyone 1 Orb"
 	  
+	  74.0 "NEXT: Stormclouds->Knockback->Buster"
 	  75.0 "Tanks and DPS 1 Orb"
 	  
+	  147.0 "NEXT: Buffed Aoe->Add->Buster->Stepped Leader"
 	  149.0 "Everyone 1 Orb"
 	  
-      183.0 "Off Tank 3 Orbs"
-	  222.0 "Everyone 1 Orb"
+      180.0 "Off Tank 3 Orbs"
+	  203.0 "Prepare for Stepped Leader"
 	  
+	  229.0 "Fury's 14"
+	  231.0 "Everyone 1 Orb"
+	  
+	  275.0 "NEXT: Donut Stepped Leader->Chain Lightning->Buster"
+	  280.0 "Stack for Donut Stepped Leader"
+	  
+	  318.0 "NEXT: Add, Buffed Aoe, Stepped Leader, Buster"
 	  319.0 "Off Tank 3 Orbs"
+	  360.0 "Prepare for Stepped Leader"
+	  
 	  338.0 "Everyone 1 Orb"
 	  
+	  385.0 "NEXT: Fury's 14 with charge!"
 	  389.0 "Everyone 1 Orb"
 	  
+	  430.0 "NEXT: Stormclouds->Knockback->Chain Lightning->Buster"
 	  435.0 "Tanks and DPS 1 Orb"
+	  
+	  530.0 "NEXT: Stepped Leader->Buffed AoE -> Buffed AoE"
+	  532.0 "Prepare for Stepped Leader"
+	  
+	  547.0 "Everyone 1 Orb"
+	  576.0 "Everyone 1 Orb"
     `,
 	timelineTriggers: [
       {
@@ -771,6 +803,20 @@ Options.Triggers = [
         regex: /Tanks and DPS 1 Orb/,
         alertText: {
           en: 'Tanks and DPS 1 Orb',
+        }
+	  },
+      {
+        id: 'E5S Prepare for Stepped Leader',
+        regex: /Prepare for Stepped Leader/,
+        alertText: {
+          en: 'Prepare for Stepped Leader',
+        }
+	  },
+	  {
+        id: 'E5S Stack for Donut Stepped Leader',
+        regex: /Stack for Donut Stepped Leader/,
+        alertText: {
+          en: 'Stack for Donut Stepped Leader',
         }
 	  }
 	],
