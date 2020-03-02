@@ -757,7 +757,7 @@ Options.Triggers = [
 	  149.0 "Everyone 1 Orb"
 	  
       180.0 "Off Tank 3 Orbs"
-	  203.0 "Prepare for Stepped Leader"
+	  200.0 "Prepare for Stepped Leader"
 	  
 	  229.0 "Fury's 14"
 	  231.0 "Everyone 1 Orb"
@@ -776,6 +776,8 @@ Options.Triggers = [
 	  
 	  430.0 "NEXT: Stormclouds->Knockback->Chain Lightning->Buster"
 	  435.0 "Tanks and DPS 1 Orb"
+	  
+#	  480.0 "Everyone 1 Orb"
 	  
 	  530.0 "NEXT: Stepped Leader->Buffed AoE -> Buffed AoE"
 	  532.0 "Prepare for Stepped Leader"
