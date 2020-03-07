@@ -103,7 +103,11 @@ Options.DisabledTriggers = {
   'E3S Refreshed' : true,
   'E4S Massive Landslide - Front' : true,
   'E4S Massive Landslide - Sides' : true,
-  'E4S Bury Directions' : true
+  'E4S Bury Directions' : true,
+  'RubyEx Ruby Claw' : true,
+  'RubyEx Change of Heart' : true,
+  'RubyEx Pall of Rage' : true,
+  'RubyEx Pall of Grief' : true
 };
 
 
@@ -220,7 +224,7 @@ Options.Triggers = [
           cn: '组哈哈',
         },
       },
-	  {
+      {
         id: 'General Reprisal',
         regex: /:(\y{Name}):1D6F:Reprisal:/,
         condition: function(data) {
@@ -232,12 +236,12 @@ Options.Triggers = [
           };
         },
       },
-	]
+    ]
   },
   {
-	zoneRegex: /^Alphascape V4.0 \(Savage\)$/,
-	triggers: [
-	  {
+    zoneRegex: /^Alphascape V4.0 \(Savage\)$/,
+    triggers: [
+      {
         id: 'O12S Archive All Blue Arrow',
         regex: / 1B:........:Rear Power Unit:....:....:009D:0000:0000:0000:/,
         alertText: {
@@ -246,7 +250,7 @@ Options.Triggers = [
           fr: 'Arrière gauche',
         },
       },
-	  {
+      {
         id: 'O12S Archive All Red Arrow',
         regex: / 1B:........:Rear Power Unit:....:....:009C:0000:0000:0000:/,
         alertText: {
@@ -255,7 +259,7 @@ Options.Triggers = [
           fr: 'Arrière droite',
         },
       },
-	  {
+      {
         id: 'O12S Latent Defect',
         regex: / 1A:\y{ObjectId}:(\y{Name}) gains the effect of (?:Unknown_686|Latent Defect) from/,
         regexDe: / 1A:\y{ObjectId}:(\y{Name}) gains the effect of (?:Unknown_686|Latenter Defekt) from/,
@@ -274,8 +278,8 @@ Options.Triggers = [
     ],
   },
   {
-	zoneRegex: /(^Eden's Gate: Resurrection \(Savage\)$|Unknown Zone \(355\))/,
-	triggers: [
+    zoneRegex: /(^Eden's Gate: Resurrection \(Savage\)$|Unknown Zone \(355\))/,
+    triggers: [
       {
         id: 'E1S Delta Attack 1 v2',
         regex: / 14:44F4:Eden Prime starts using (?:Delta Attack|)/,
@@ -306,33 +310,33 @@ Options.Triggers = [
     ],
   },
   {
-	zoneRegex: /(^Eden's Gate: Descent \(Savage\)$|Unknown Zone \(356\))/,
-	timeline: `
+    zoneRegex: /(^Eden's Gate: Descent \(Savage\)$|Unknown Zone \(356\))/,
+    timeline: `
       136.0 "Phase 2: Hand"
-	  205.0 "Phase 3: Single Flare, Puddle and Prey"
-	  275.0 "Phase 4: Equilibrium and Clock"
-	  344.0 "Phase 5: Double Flares"
-	  378.0 "Spread for Flares"
-	  385.0 "Stack"
-	  424.0 "Flares + Eyes"
-	  443.0 "Equilibrium"
-	  447.0 "Punishing Ray"
-	  453.0 "Clock Positions"
+      205.0 "Phase 3: Single Flare, Puddle and Prey"
+      275.0 "Phase 4: Equilibrium and Clock"
+      344.0 "Phase 5: Double Flares"
+      378.0 "Spread for Flares"
+      385.0 "Stack"
+      424.0 "Flares + Eyes"
+      443.0 "Equilibrium"
+      447.0 "Punishing Ray"
+      453.0 "Clock Positions"
 
       # InfoTexts
       infotext "Phase 2: Hand"
-	  infotext "Phase 3: Single Flare, Puddle and Prey"
-	  infotext "Phase 4: Equilibrium and Clock"
-	  infotext "Phase 5: Double Flares"
-	  
-	  infotext "Spread for Flares" 
-	  infotext "Stack"
-	  infotext "Flares + Eyes"
-	  infotext "Equilibrium"
-	  infotext "Punishing Ray"
-	  infotext "Clock Positions"
+      infotext "Phase 3: Single Flare, Puddle and Prey"
+      infotext "Phase 4: Equilibrium and Clock"
+      infotext "Phase 5: Double Flares"
+      
+      infotext "Spread for Flares" 
+      infotext "Stack"
+      infotext "Flares + Eyes"
+      infotext "Equilibrium"
+      infotext "Punishing Ray"
+      infotext "Clock Positions"
     `,
-	triggers: [
+    triggers: [
       {
         id: 'E2S Doomvoid Cleaver v2',
         regex: / 14:3E63:Voidwalker starts using (?:Doomvoid Cleaver|)/,
@@ -345,7 +349,7 @@ Options.Triggers = [
           ja: '散開',
         },
       },
-	  {
+      {
         id: 'E2S Cycle of Retribution v2',
         regex: / 14:4659:Voidwalker starts using (?:Cycle Of Retribution|)/,
         regexFr: / 14:4659:Marcheuse Du Néant starts using (?:Multi-taillade Vengeresse|)/,
@@ -354,7 +358,7 @@ Options.Triggers = [
           en: 'In, Clock, Sides',
           fr: 'Intérieur, Position, Côtés',
           ja: '中 => 散開 => 横',
-		},
+        },
       },
       {
         id: 'E2S Cycle of Chaos v2',
@@ -370,58 +374,58 @@ Options.Triggers = [
     ],
   },
   {
-	zoneRegex: /^Eden's Gate: Inundation \(Savage\)$/,
-	timeline: `
+    zoneRegex: /^Eden's Gate: Inundation \(Savage\)$/,
+    timeline: `
       hideall "Hidden - Disable Left Right Mode"
       hideall "Hidden - Enable Left Right Mode"
-	  
-	  2.0 "Hidden - Disable Left Right Mode"
-	  14.0 "Hidden - Disable Left Right Mode"
-	  25.0 "Hidden - Disable Left Right Mode"
+      
+      2.0 "Hidden - Disable Left Right Mode"
+      14.0 "Hidden - Disable Left Right Mode"
+      25.0 "Hidden - Disable Left Right Mode"
 
-	  133.0 "Hidden - Enable Left Right Mode"
-	  142.0 "Hidden - Enable Left Right Mode"
-	  147.0 "Hidden - Enable Left Right Mode"
-	  
-	  188.0 "Hidden - Disable Left Right Mode"
-	  198.0 "Hidden - Disable Left Right Mode"
-	  212.0 "Hidden - Disable Left Right Mode"
-	  
-	  317.0 "Buster Soon!"
+      133.0 "Hidden - Enable Left Right Mode"
+      142.0 "Hidden - Enable Left Right Mode"
+      147.0 "Hidden - Enable Left Right Mode"
+      
+      188.0 "Hidden - Disable Left Right Mode"
+      198.0 "Hidden - Disable Left Right Mode"
+      212.0 "Hidden - Disable Left Right Mode"
+      
+      317.0 "Buster Soon!"
 
-	  537.0 "Hidden - Enable Left Right Mode"
-	  542.0 "Hidden - Enable Left Right Mode"
-	  545.0 "Hidden - Enable Left Right Mode"
+      537.0 "Hidden - Enable Left Right Mode"
+      542.0 "Hidden - Enable Left Right Mode"
+      545.0 "Hidden - Enable Left Right Mode"
 
-	  567.0 "Hidden - Disable Left Right Mode"
-	  578.0 "Hidden - Disable Left Right Mode"
-	  588.0 "Hidden - Disable Left Right Mode"
+      567.0 "Hidden - Disable Left Right Mode"
+      578.0 "Hidden - Disable Left Right Mode"
+      588.0 "Hidden - Disable Left Right Mode"
     `,
-	timelineTriggers: [
+    timelineTriggers: [
       {
         id: 'E3S Buster Soon',
         regex: /Buster Soon!/,
         alertText: {
           en: 'Buster Soon',
         }
-	  },
-	  {
-		id: 'E3S Hidden - Disable Left Right Mode',
+      },
+      {
+        id: 'E3S Hidden - Disable Left Right Mode',
         regex: /Hidden - Disable Left Right Mode/,
         run: function(data) {
           data.temporaryCurrentLeftRightMode = false;
         }
-	  },
-	  {
-		id: 'E3S Hidden - Enable Left Right Mode',
+      },
+      {
+        id: 'E3S Hidden - Enable Left Right Mode',
         regex: /Hidden - Enable Left Right Mode/,
         run: function(data) {
           data.temporaryCurrentLeftRightMode = true;
         }
       },
-	],
-	triggers: [
-	  {
+    ],
+    triggers: [
+      {
         id: 'E3S Refreshed v2',
         regex: / 14:400F:Leviathan starts using Refreshing Shower/,
         regexCn: / 14:400F:利维亚桑 starts using Refreshing Shower/,
@@ -430,16 +434,16 @@ Options.Triggers = [
         regexJa: / 14:400F:リヴァイアサン starts using 水の覚醒/,
         run: function(data) {
           data.refreshed = true;
-		  // "E3S Hidden - Disable Left Right Mode" doesn't seem to work. Use refreshing shower as another way to hopefully activate it
-		  data.temporaryCurrentLeftRightMode = false; 
+          // "E3S Hidden - Disable Left Right Mode" doesn't seem to work. Use refreshing shower as another way to hopefully activate it
+          data.temporaryCurrentLeftRightMode = false; 
         },
       },
-	  {
+      {
         id: 'E3S Black Smokers',
         regex: / 00:282B:Leviathan begins casting Black Smokers/,
         run: function(data) {
-	      // Just to really make sure "E3S Hidden - Enable Left Right Mode" activates
-		  data.temporaryCurrentLeftRightMode = true; 
+          // Just to really make sure "E3S Hidden - Enable Left Right Mode" activates
+          data.temporaryCurrentLeftRightMode = true; 
         },
       },
       {
@@ -450,17 +454,17 @@ Options.Triggers = [
         regexFr: / 14:3FEB:Léviathan starts using Courant Évanescent/,
         regexJa: / 14:3FEB:リヴァイアサン starts using テンポラリーカレント/,
         alertText: function(data) {
-		  if (data.temporaryCurrentLeftRightMode) {
-			return {
+          if (data.temporaryCurrentLeftRightMode) {
+            return {
               en: 'Left Front / Right Back',
-			};
-	      }
-		  return {
+            };
+          }
+          return {
             en: 'Front left / Back right',
             de: 'Vorne Links / Hinten Rechts',
             fr: 'Avant gauche / Arrière droite',
             ja: '左前 / 右後ろ',
-		  };
+          };
         },
       },
       {
@@ -471,17 +475,17 @@ Options.Triggers = [
         regexFr: / 14:3FEA:Léviathan starts using Courant Évanescent/,
         regexJa: / 14:3FEA:リヴァイアサン starts using テンポラリーカレント/,
         alertText: function(data) {
-		  if (data.temporaryCurrentLeftRightMode) {
-			return {
+          if (data.temporaryCurrentLeftRightMode) {
+            return {
               en: 'Left Back / Right Front',
-			};
-	      }
-		  return {
+            };
+          }
+          return {
             en: 'Front right / Back left',
             de: 'Vorne Rechts / Hinten Links',
             fr: 'Avant droit / Arrière gauche',
             ja: '右前 / 左後ろ',
-		  };
+          };
         },
       },
       {
@@ -500,17 +504,17 @@ Options.Triggers = [
         },
         delaySeconds: 6.2,
         alertText: function(data) {
-		  if (data.temporaryCurrentLeftRightMode) {
-			return {
+          if (data.temporaryCurrentLeftRightMode) {
+            return {
               en: 'Left Front / Right Back',
-			};
-	      }
-		  return {
+            };
+          }
+          return {
             en: 'Front left / Back right',
             de: 'Vorne Links / Hinten Rechts',
             fr: 'Avant gauche / Arrière droite',
             ja: '左前 / 右後ろ',
-		  };
+          };
         },
       },
       {
@@ -525,70 +529,70 @@ Options.Triggers = [
         },
         delaySeconds: 6.2,
         alertText: function(data) {
-		  if (data.temporaryCurrentLeftRightMode) {
-			return {
+          if (data.temporaryCurrentLeftRightMode) {
+            return {
               en: 'Left Back / Right Front',
-			};
-	      }
-		  return {
+            };
+          }
+          return {
             en: 'Front right / Back left',
             de: 'Vorne Rechts / Hinten Links',
             fr: 'Avant droit / Arrière gauche',
             ja: '右前 / 左後ろ',
-		  };
-		},
+          };
+        },
       },
-	]
+    ]
   },
   {
     zoneRegex: /^Eden's Gate: Sepulture \(Savage\)$/,
-	triggers: [
+    triggers: [
       {
-		// Evil Earth Callouts - Part 1
+        // Evil Earth Callouts - Part 1
         id: 'E4S - Evil Earth Detection',
         regex: /.*15:.*:Titan:410C:Evil Earth:E0000000.*44:44:0:0:0:1000:(\d*:\d*):0/,
-		// No idea why, but this function is always triggered 8 times all with the same timestamp and text...
-		// [1/12/2019 10:12:45 am] Info: Replay: BrowserConsole: [23:03:05.691] 15:4000F63A:Titan:410C:Evil Earth:E0000000::0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:::::::::::44:44:0:0:0:1000:115:115:0 (Source: , Line: 545)
+        // No idea why, but this function is always triggered 8 times all with the same timestamp and text...
+        // [1/12/2019 10:12:45 am] Info: Replay: BrowserConsole: [23:03:05.691] 15:4000F63A:Titan:410C:Evil Earth:E0000000::0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:::::::::::44:44:0:0:0:1000:115:115:0 (Source: , Line: 545)
         alertText: function(data, matches) {
-		  //console.log(matches[0]);
-		  data.evilEarth = true;
-		  switch(matches[1]) {
-			case "95:105":  // Verified - 1 Dec 2019, 21:23, 21:45, 21:52
-			case "105:95":  // Verified - 1 Dec 2019, 21:23, 21:45, 21:52
-			case "85:115":  // Verified - 1 Dec 2019, 21:42
-			case "115:85":  // Verified - 1 Dec 2019, 21:42
-			  data.evilEarthSafeSpot = 'Alpha';
-			  break;
-			case "95:95":   // Verified - 1 Dec 2019, 21:56
-			case "105:105": // Verified - 1 Dec 2019, 21:56
-			case "85:85":   // Verified - 1 Dec 2019, 21:14
-			case "115:115": // Verified - 1 Dec 2019, 21:14
-			  data.evilEarthSafeSpot = 'Bravo';
-			  break;
-            default:
-			  data.evilEarthSafeSpot = 'UNKNOWN';
-			  console.log('E4S - Evil Earth Detection - Unknown location ' + matches[0])
+          //console.log(matches[0]);
+          data.evilEarth = true;
+          switch(matches[1]) {
+            case "95:105":  // Verified - 1 Dec 2019, 21:23, 21:45, 21:52
+            case "105:95":  // Verified - 1 Dec 2019, 21:23, 21:45, 21:52
+            case "85:115":  // Verified - 1 Dec 2019, 21:42
+            case "115:85":  // Verified - 1 Dec 2019, 21:42
+              data.evilEarthSafeSpot = 'Alpha';
               break;
-		  }
-	      return {
+            case "95:95":   // Verified - 1 Dec 2019, 21:56
+            case "105:105": // Verified - 1 Dec 2019, 21:56
+            case "85:85":   // Verified - 1 Dec 2019, 21:14
+            case "115:115": // Verified - 1 Dec 2019, 21:14
+              data.evilEarthSafeSpot = 'Bravo';
+              break;
+            default:
+              data.evilEarthSafeSpot = 'UNKNOWN';
+              console.log('E4S - Evil Earth Detection - Unknown location ' + matches[0])
+              break;
+          }
+          return {
             en: 'Go to ' + data.evilEarthSafeSpot,
-		   };
-		}
+           };
+        }
       },
       {
-		// Evil Earth Callouts - Part 2
+        // Evil Earth Callouts - Part 2
         id: 'E4S - Aftershock',
         regex: /.* 15:.*:Titan:41B5:Aftershock:E0000000.*44:44:0:0:0:1000:(\d*:\d*):0/,
         alertText: function(data, matches) {
-		  //console.log(matches[0]);
-	      if(data.evilEarth == true) {
-			if((data.evilEarthSafeSpot == 'Alpha' && matches[1] == '105:105') || (data.evilEarthSafeSpot == 'Bravo' && matches[1] == '95:105')) {
-			  data.evilEarth == false
-	          return {
+          //console.log(matches[0]);
+          if(data.evilEarth == true) {
+            if((data.evilEarthSafeSpot == 'Alpha' && matches[1] == '105:105') || (data.evilEarthSafeSpot == 'Bravo' && matches[1] == '95:105')) {
+              data.evilEarth == false
+              return {
                 en: 'MOVE!',
-		      };			  
-			}
-		  }
+              };              
+            }
+          }
         },
       },
       {
@@ -621,9 +625,9 @@ Options.Triggers = [
         },
       },
 // Fixed in Cactbot 0.15.2
-//	  // Unfortunately, "E4S Bury Directions" is sometimes not triggering.
-//	  // Hoping that this is the issue - reverting cactbot changes for earthen armor detection to v0.14.1's
-//	  {
+//    // Unfortunately, "E4S Bury Directions" is sometimes not triggering.
+//    // Hoping that this is the issue - reverting cactbot changes for earthen armor detection to v0.14.1's
+//    {
 //        id: 'E4S Earthen Armor v2',
 //        regex: / 15:\y{ObjectId}:Titan:40E[79]:Earthen Armor:/,
 //        regexCn: / 15:\y{ObjectId}:泰坦:40E[79]:大地之铠:/,
@@ -636,7 +640,7 @@ Options.Triggers = [
 //          delete data.printedBury;
 //        },
 //      },
-	  {
+      {
         // Bomb positions are all x = (86 west, 100 mid, 114 east), y = (86, 100, 114).
         // Note: as these may hit multiple people, there may be multiple lines for the same bomb.
         id: 'E4S Bury Directions v2',
@@ -706,7 +710,7 @@ Options.Triggers = [
           }
         },
       },
-	  {
+      {
         id: 'E4S - Crumbling Down Boulders - Part 1',
         regex: /.*15:.*:Titan:4110:Seismic Wave/,
         alertText: function(data, matches) {
@@ -716,124 +720,173 @@ Options.Triggers = [
             en: 'MOVE!',
            };
         }
-	  },
-	  {
+      },
+      {
         id: 'E4S - Crumbling Down Boulders - Part 2',
         regex: /.*15:.*:Bomb Boulder:410A:Explosion:E0000000/,
-		alertText: function(data, matches) {
-		  //console.log(matches[0]);
+        alertText: function(data, matches) {
+          //console.log(matches[0]);
           data.seismicWave = false;
           return {
             en: 'MOVE!',
            };
-	    }
+        }
       },
     ],
   },
-//  {
-//	// Ruby EX
-//  	zoneRegex: /^Cinder Drift \(Extreme\)$/,
-//    triggers: [
-//      {
-//        id: 'RubyEx Optimized Ultima',
-//        regex: Regexes.startsUsing({ source: 'The Ruby Weapon', id: '4ABE', capture: false }),
-//        infoText: function(data) {
-//		}
-//      }
-//    ]
-//  },
   {
-	// E5S
-  	zoneRegex: /^Eden's Verse: Fulmination \(Savage\)$/,
-	timeline: `
-	  1.0  "NEXT: Rods->Add->Buster"
+  // Ruby EX
+    zoneRegex: /^Cinder Drift \(Extreme\)$/,
+    triggers: [
+      {
+        id: 'RubyEx Check Chariot or Dynamo',
+        regex: /Raven's image (readies Iron Chariot|begins casting Lunar Dynamo)/,
+		suppressSeconds: 1,
+        alertText: {
+          en: 'Check Chariot or Dynamo',
+        },
+      },
+	  {
+        id: 'RubyEx Change of Heart v2',
+        regex: Regexes.startsUsing({ source: 'The Ruby Weapon', id: '4AFC', capture: false }),
+        regexDe: Regexes.startsUsing({ source: 'Rubin-Waffe', id: '4AFC', capture: false }),
+        regexFr: Regexes.startsUsing({ source: 'Arme Rubis', id: '4AFC', capture: false }),
+        regexJa: Regexes.startsUsing({ source: 'ルビーウェポン', id: '4AFC', capture: false }),
+        alertText: {
+          en: 'Prepare for Tank Swap',
+        },
+      },
+	  {
+        id: 'RubyEx Ruby Claw v2',
+        regex: Regexes.startsUsing({ source: 'Raven\'s Image', id: '4AFF' }),
+        regexDe: Regexes.startsUsing({ source: 'Naels Trugbild', id: '4AFF' }),
+        regexFr: Regexes.startsUsing({ source: 'Spectre De Nael', id: '4AFF' }),
+        regexJa: Regexes.startsUsing({ source: 'ネールの幻影', id: '4AFF' }),
+        suppressSeconds: 1,
+        response: Responses.tankBuster(),
+      },
+	  {
+        id: 'RubyEx Pall of Rage v2',
+        regex: Regexes.gainsEffect({ effect: 'Pall of Rage' }),
+        regexDe: Regexes.gainsEffect({ effect: 'Zorn' }),
+        regexFr: Regexes.gainsEffect({ effect: 'Fureur' }),
+        regexJa: Regexes.gainsEffect({ effect: '憤怒' }),
+        preRun: function(data, matches) {
+          data.colors = data.colors || [];
+          data.colors[matches.target] = 'blue';
+        },
+        infoText: function(data, matches) {
+          if (data.me == matches.target) {
+            return {
+              en: 'Right. Attack Blue.',
+              de: 'Greife Blau an (Osten)',
+              fr: 'Attaquez le bleu (Est)',
+              ko: '파란색 공격 (오른쪽)',
+            };
+          }
+        },
+      },
+	  {
+        id: 'RubyEx Pall of Grief v2',
+        regex: Regexes.gainsEffect({ effect: 'Pall of Grief' }),
+        regexDe: Regexes.gainsEffect({ effect: 'Trauer' }),
+        regexFr: Regexes.gainsEffect({ effect: 'Angoisse' }),
+        regexJa: Regexes.gainsEffect({ effect: '悲嘆' }),
+        preRun: function(data, matches) {
+          data.colors = data.colors || [];
+          data.colors[matches.target] = 'red';
+        },
+        infoText: function(data, matches) {
+          if (data.me == matches.target) {
+            return {
+              en: 'Left. Attack Red.',
+              de: 'Greife Rot an (Westen)',
+              fr: 'Attaquez le rouge (Ouest)',
+              ko: '빨간색 공격 (왼쪽)',
+            };
+          }
+        },
+      },
+    ]
+  },
+  {
+    // E5S
+    zoneRegex: /^Eden's Verse: Fulmination \(Savage\)$/,
+    timeline: `
+      1.0  "NEXT: Rods->Add->Buster"
       37.0 "Off Tank 3 Orbs"
-	  39.0 "Everyone 1 Orb"
-	  
-	  74.0 "NEXT: Stormclouds->Knockback->Buster"
-	  75.0 "Tanks and DPS 1 Orb"
-	  
-	  147.0 "NEXT: Buffed Aoe->Add->Buster->Stepped Leader"
-	  149.0 "Everyone 1 Orb"
-	  
+      39.0 "Everyone 1 Orb"
+      
+      74.0 "NEXT: Stormclouds->Knockback->Buster"
+      75.0 "Tanks and DPS 1 Orb"
+      
+      147.0 "NEXT: Buffed Aoe->Add->Buster->Stepped Leader"
+      149.0 "Everyone 1 Orb"
+      
       180.0 "Off Tank 3 Orbs"
-	  200.0 "Prepare for Stepped Leader"
-	  
-	  229.0 "Fury's 14"
-	  231.0 "Everyone 1 Orb"
-	  
-	  275.0 "NEXT: Donut Stepped Leader->Chain Lightning->Buster"
-	  280.0 "Stack for Donut Stepped Leader"
-	  
-	  318.0 "NEXT: Add, Buffed Aoe, Stepped Leader, Buster"
-	  319.0 "Off Tank 3 Orbs"
-	  360.0 "Prepare for Stepped Leader"
-	  
-	  338.0 "Everyone 1 Orb"
-	  
-	  385.0 "NEXT: Fury's 14 with charge!"
-	  389.0 "Everyone 1 Orb"
-	  
-	  430.0 "NEXT: Stormclouds->Knockback->Chain Lightning->Buster"
-	  435.0 "Tanks and DPS 1 Orb"
-	  
-#	  480.0 "Everyone 1 Orb"
-	  
-	  530.0 "NEXT: Stepped Leader->Buffed AoE -> Buffed AoE"
-	  532.0 "Prepare for Stepped Leader"
-	  
-	  547.0 "Everyone 1 Orb"
-	  576.0 "Everyone 1 Orb"
+      200.0 "Prepare for Stepped Leader"
+      
+      229.0 "Fury's 14"
+      231.0 "Everyone 1 Orb"
+      
+      275.0 "NEXT: Donut Stepped Leader->Chain Lightning->Buster"
+      280.0 "Stack for Donut Stepped Leader"
+      
+      318.0 "NEXT: Add, Buffed Aoe, Stepped Leader, Buster"
+      319.0 "Off Tank 3 Orbs"
+      360.0 "Prepare for Stepped Leader"
+      
+      338.0 "Everyone 1 Orb"
+      
+      385.0 "NEXT: Fury's 14 with charge!"
+      389.0 "Everyone 1 Orb"
+      
+      430.0 "NEXT: Stormclouds->Knockback->Chain Lightning->Buster"
+      435.0 "Tanks and DPS 1 Orb"
+      
+#     480.0 "Everyone 1 Orb"
+      
+      530.0 "NEXT: Stepped Leader->Buffed AoE -> Buffed AoE"
+      532.0 "Prepare for Stepped Leader"
+      
+      547.0 "Everyone 1 Orb"
+      576.0 "Everyone 1 Orb"
     `,
-	timelineTriggers: [
+    timelineTriggers: [
       {
         id: 'E5S Off Tank 3 Orbs',
         regex: /Off Tank 3 Orbs/,
         alertText: {
           en: 'Off Tank 3 Orbs',
         }
-	  },
-	  {
+      },
+      {
         id: 'E5S Everyone 1 Orb',
         regex: /Everyone 1 Orb/,
         alertText: {
           en: 'Everyone 1 Orb',
         }
-	  },
+      },
       {
         id: 'E5S Tanks and DPS 1 Orb',
         regex: /Tanks and DPS 1 Orb/,
         alertText: {
           en: 'Tanks and DPS 1 Orb',
         }
-	  },
+      },
       {
         id: 'E5S Prepare for Stepped Leader',
         regex: /Prepare for Stepped Leader/,
         alertText: {
           en: 'Prepare for Stepped Leader',
         }
-	  },
-	  {
+      },
+      {
         id: 'E5S Stack for Donut Stepped Leader',
         regex: /Stack for Donut Stepped Leader/,
         alertText: {
           en: 'Stack for Donut Stepped Leader',
         }
-	  }
-	],
-	triggers: [
-      {
-        id: 'E2S Doomvoid Cleaver v2',
-        regex: / 14:3E63:Voidwalker starts using (?:Doomvoid Cleaver|)/,
-        regexDe: / 14:3E63:Nichtswandler starts using (?:Nichtsmarter-Schlachter|)/,
-        regexFr: / 14:3E63:Marcheuse Du Néant starts using (?:Couperet Du Néant Ravageur|)/,
-        regexJa: / 14:3E63:ヴォイドウォーカー starts using (?:ドゥームヴォイド・クリーバー|)/,
-        alertText: {
-          en: 'Clock Positions',
-          fr: 'Position',
-          ja: '散開',
-        },
       }
     ]
   }
