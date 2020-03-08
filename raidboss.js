@@ -889,7 +889,78 @@ Options.Triggers = [
         }
       }
     ]
+  }, 
+    {
+    // E6S
+    zoneRegex: /^Eden's Verse: Furor \(Savage\)$/,
+    timeline: `
+	  72.0 "Arms Length"
+	  149.0 "Center Boss"
+	  171.0 "Tanks Healers Tethers"
+	  186.0 "Bait AoE in middle"
+	  210.0 "DPS Tethers"
+	  286.0 "Bait AoE in middle"
+	  322.0 "Center Boss"
+	  339.0 "Tanks Healers Tethers"
+	  357.0 "DPS Tethers"
+	  368.0 "Center Boss"
+	  396.0 "Bait AoE in middle"
+	  409.0 "Buster Combo And Center Boss"
+      447.0 "Tank Healer Delta, DPS Bravo"
+    `,
+    timelineTriggers: [
+      {
+        id: 'E6S Arms Length',
+        regex: /Arms Length/,
+        alertText: {
+          en: 'Arms Length',
+        }
+      },
+	  {
+        id: 'E6S Center Boss',
+        regex: /Center Boss/,
+        alertText: {
+          en: 'Center Boss',
+        }
+      },
+	  {
+        id: 'E6S Tanks Healers Tethers',
+        regex: /Tanks Healers Tethers/,
+        alertText: {
+          en: 'Tanks Healers Tethers',
+        }
+      },
+	  {
+        id: 'E6S Bait AoE in middle',
+        regex: /Bait AoE in middle/,
+        alertText: {
+          en: 'Bait AoE in middle',
+        }
+      },
+	  {
+        id: 'E6S DPS Tethers',
+        regex: /DPS Tethers/,
+        alertText: {
+          en: 'DPS Tethers',
+        }
+      },
+	  {
+        id: 'E6S Buster Combo + Center Boss',
+        regex: /Buster Combo And Center Boss/,
+        alertText: {
+          en: 'Buster Combo And Center Boss',
+        }
+      },
+	  {
+        id: 'E6S Tank Healer Delta, DPS Bravo',
+        regex: /Tank Healer Delta, DPS Bravo/,
+        alertText: {
+          en: 'Tank Healer Delta, DPS Bravo',
+        }
+      },
+    ]
   }
+
 ];
 
 // Per trigger options.  By default, each trigger uses the global options
