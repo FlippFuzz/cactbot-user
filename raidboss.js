@@ -885,7 +885,7 @@ Options.Triggers = [
         id: 'E5S Stack for Donut Stepped Leader',
         regex: /Stack for Donut Stepped Leader/,
         alertText: {
-          en: 'Stack for Donut Stepped Leader',
+          en: 'Stack for Donut Stepped Leader', 
         }
       }
     ]
@@ -894,19 +894,22 @@ Options.Triggers = [
     // E6S
     zoneRegex: /^Eden's Verse: Furor \(Savage\)$/,
     timeline: `
-	  72.0 "Arms Length"
+	  70.0 "Arms Length"
 	  149.0 "Center Boss"
-	  171.0 "Tanks Healers Tethers"
+	  165.0 "Tanks Healers Tethers"
 	  186.0 "Bait AoE in middle"
-	  210.0 "DPS Tethers"
-	  286.0 "Bait AoE in middle"
+	  205.0 "DPS Tethers"
+	  284.0 "Bait AoE in middle"
 	  322.0 "Center Boss"
 	  339.0 "Tanks Healers Tethers"
 	  357.0 "DPS Tethers"
 	  368.0 "Center Boss"
 	  396.0 "Bait AoE in middle"
-	  409.0 "Buster Combo And Center Boss"
-      447.0 "Tank Healer Delta, DPS Bravo"
+	  406.0 "Buster Combo And Center Boss"
+      442.0 "Tank Healer Delta, DPS Bravo"
+	  492.0 "Bait Aoe, then goto intercardinals"
+	  531.0 "Tank Healer tethers to intercardinals"
+	  547.0 "Air Bump, then DPS tethers to intercardinals"
     `,
     timelineTriggers: [
       {
@@ -956,6 +959,27 @@ Options.Triggers = [
         regex: /Tank Healer Delta, DPS Bravo/,
         alertText: {
           en: 'Tank Healer Delta, DPS Bravo',
+        }
+      },
+	  {
+        id: 'E6S Bait Aoe, then goto intercardinals',
+        regex: /Bait Aoe, then goto intercardinals/,
+        alertText: {
+          en: 'Bait Aoe, then goto intercardinals',
+        }
+      },
+	  {
+        id: 'E6S Tank Healer tethers to intercardinals',
+        regex: /Tank Healer tethers to intercardinals/,
+        alertText: {
+          en: 'Tank Healer tethers to intercardinals',
+        }
+      },
+	  {
+        id: 'E6S Air Bump, then DPS tethers to intercardinals',
+        regex: /Air Bump, then DPS tethers to intercardinals/,
+        alertText: {
+          en: 'Air Bump, then DPS tethers to intercardinals',
         }
       },
     ]
