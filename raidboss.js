@@ -900,16 +900,15 @@ Options.Triggers = [
 	  186.0 "Bait AoE in middle"
 	  205.0 "DPS Tethers"
 	  284.0 "Bait AoE in middle"
-	  322.0 "Center Boss"
 	  339.0 "Tanks Healers Tethers"
 	  357.0 "DPS Tethers"
-	  368.0 "Center Boss"
+	  366.0 "Center Boss"
 	  396.0 "Bait AoE in middle"
 	  406.0 "Buster Combo And Center Boss"
       442.0 "Tank Healer Delta, DPS Bravo"
-	  492.0 "Bait Aoe, then goto intercardinals"
-	  531.0 "Tank Healer tethers to intercardinals"
-	  547.0 "Air Bump, then DPS tethers to intercardinals"
+	  490.3 "Bait Aoe, then goto intercardinals"
+	  521.0 "Tank Healer tethers to intercardinals"
+	  536.0 "Air Bump, then DPS tethers to intercardinals"
     `,
     timelineTriggers: [
       {
