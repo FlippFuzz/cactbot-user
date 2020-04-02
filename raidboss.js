@@ -107,7 +107,8 @@ Options.DisabledTriggers = {
   'RubyEx Ruby Claw' : true,
   'RubyEx Change of Heart' : true,
   'RubyEx Pall of Rage' : true,
-  'RubyEx Pall of Grief' : true
+  'RubyEx Pall of Grief' : true,
+  'E6S Strike Spark' : true
 };
 
 
@@ -741,12 +742,12 @@ Options.Triggers = [
       {
         id: 'RubyEx Check Chariot or Dynamo',
         regex: /Raven's image (readies Iron Chariot|begins casting Lunar Dynamo)/,
-		suppressSeconds: 1,
+        suppressSeconds: 1,
         alertText: {
           en: 'Check Chariot or Dynamo',
         },
       },
-	  {
+      {
         id: 'RubyEx Change of Heart v2',
         regex: Regexes.startsUsing({ source: 'The Ruby Weapon', id: '4AFC', capture: false }),
         regexDe: Regexes.startsUsing({ source: 'Rubin-Waffe', id: '4AFC', capture: false }),
@@ -756,7 +757,7 @@ Options.Triggers = [
           en: 'Prepare for Tank Swap',
         },
       },
-	  {
+      {
         id: 'RubyEx Ruby Claw v2',
         regex: Regexes.startsUsing({ source: 'Raven\'s Image', id: '4AFF' }),
         regexDe: Regexes.startsUsing({ source: 'Naels Trugbild', id: '4AFF' }),
@@ -765,7 +766,7 @@ Options.Triggers = [
         suppressSeconds: 1,
         response: Responses.tankBuster(),
       },
-	  {
+      {
         id: 'RubyEx Pall of Rage v2',
         regex: Regexes.gainsEffect({ effect: 'Pall of Rage' }),
         regexDe: Regexes.gainsEffect({ effect: 'Zorn' }),
@@ -786,7 +787,7 @@ Options.Triggers = [
           }
         },
       },
-	  {
+      {
         id: 'RubyEx Pall of Grief v2',
         regex: Regexes.gainsEffect({ effect: 'Pall of Grief' }),
         regexDe: Regexes.gainsEffect({ effect: 'Trauer' }),
@@ -890,25 +891,25 @@ Options.Triggers = [
       }
     ]
   }, 
-    {
+  {
     // E6S
     zoneRegex: /^Eden's Verse: Furor \(Savage\)$/,
     timeline: `
-	  70.0 "Arms Length"
-	  149.0 "Center Boss"
-	  165.0 "Tanks Healers Tethers"
-	  186.0 "Bait AoE in middle"
-	  205.0 "DPS Tethers"
-	  284.0 "Bait AoE in middle"
-	  339.0 "Tanks Healers Tethers"
-	  357.0 "DPS Tethers"
-	  366.0 "Center Boss"
-	  396.0 "Bait AoE in middle"
-	  406.0 "Buster Combo And Center Boss"
+      70.0 "Arms Length"
+      149.0 "Center Boss"
+      165.0 "Tanks Healers Tethers"
+      186.0 "Bait AoE in middle"
+      205.0 "DPS Tethers"
+      284.0 "Bait AoE in middle"
+      339.0 "Tanks Healers Tethers"
+      357.0 "DPS Tethers"
+      366.0 "Center Boss"
+      396.0 "Bait AoE in middle"
+      406.0 "Buster Combo And Center Boss"
       442.0 "Tank Healer Delta, DPS Bravo"
-	  490.3 "Bait Aoe, then goto intercardinals"
-	  521.0 "Tank Healer tethers to intercardinals"
-	  536.0 "Air Bump, then DPS tethers to intercardinals"
+      490.3 "Bait Aoe, then goto intercardinals"
+      521.0 "Tank Healer tethers, then intercardinals"
+      536.0 "DPS tethers, then air bump, then intercardinals"
     `,
     timelineTriggers: [
       {
@@ -918,72 +919,224 @@ Options.Triggers = [
           en: 'Arms Length',
         }
       },
-	  {
+      {
         id: 'E6S Center Boss',
         regex: /Center Boss/,
         alertText: {
           en: 'Center Boss',
         }
       },
-	  {
+      {
         id: 'E6S Tanks Healers Tethers',
         regex: /Tanks Healers Tethers/,
         alertText: {
           en: 'Tanks Healers Tethers',
         }
       },
-	  {
+      {
         id: 'E6S Bait AoE in middle',
         regex: /Bait AoE in middle/,
         alertText: {
           en: 'Bait AoE in middle',
         }
       },
-	  {
+      {
         id: 'E6S DPS Tethers',
         regex: /DPS Tethers/,
         alertText: {
           en: 'DPS Tethers',
         }
       },
-	  {
+      {
         id: 'E6S Buster Combo + Center Boss',
         regex: /Buster Combo And Center Boss/,
         alertText: {
           en: 'Buster Combo And Center Boss',
         }
       },
-	  {
+      {
         id: 'E6S Tank Healer Delta, DPS Bravo',
         regex: /Tank Healer Delta, DPS Bravo/,
         alertText: {
           en: 'Tank Healer Delta, DPS Bravo',
         }
       },
-	  {
+      {
         id: 'E6S Bait Aoe, then goto intercardinals',
         regex: /Bait Aoe, then goto intercardinals/,
         alertText: {
           en: 'Bait Aoe, then goto intercardinals',
         }
       },
-	  {
-        id: 'E6S Tank Healer tethers to intercardinals',
-        regex: /Tank Healer tethers to intercardinals/,
+      {
+        id: 'E6S Tank Healer tethers, then intercardinals',
+        regex: /Tank Healer tethers, then intercardinals/,
         alertText: {
-          en: 'Tank Healer tethers to intercardinals',
+          en: 'Tank Healer tethers, then intercardinals',
         }
       },
-	  {
-        id: 'E6S Air Bump, then DPS tethers to intercardinals',
-        regex: /Air Bump, then DPS tethers to intercardinals/,
+      {
+        id: 'E6S DPS tethers, then air bump, then intercardinals',
+        regex: /DPS tethers, then air bump, then intercardinals/,
         alertText: {
-          en: 'Air Bump, then DPS tethers to intercardinals',
+          en: 'DPS tethers, then air bump, then intercardinals',
         }
+      }
+    ],
+    triggers: [
+      {
+        id: 'E6S Strike Spark v2',
+        regex: Regexes.startsUsing({ source: ['Ifrit', 'Raktapaksa'], id: '4BD3', capture: false }),
+        regexDe: Regexes.startsUsing({ source: ['Ifrit', 'Raktapaksa'], id: '4BD3', capture: false }),
+        regexFr: Regexes.startsUsing({ source: ['Ifrit', 'Raktapaksa'], id: '4BD3', capture: false }),
+        regexJa: Regexes.startsUsing({ source: ['イフリート', 'ラクタパクシャ'], id: '4BD3', capture: false }),
+        promise: function(data) {
+          let p = new Promise(async (res) => {
+              
+            // console.log("E6S Strike Spark v2: Promise triggered");
+              
+            // helper function to delay the promise execution for the given time
+            const sleep = (m) => new Promise((r) => setTimeout(r, m));
+      
+            await sleep(10000);
+      
+            let combatantNames = null;
+      
+            const ifritLocaleNames = {
+              en: 'Ifrit',
+              de: 'Ifrit',
+              fr: 'Ifrit',
+              ja: 'イフリート',
+            };
+      
+            const raktapaksaLocaleNames = {
+              en: 'Raktapaksa',
+              de: 'Raktapaksa',
+              fr: 'Raktapaksa',
+              ja: 'ラクタパクシャ',
+            };
+      
+            // select the 4 most recent Ifrit or Raktapaksa's depending on phase
+            if (data.phase === 'ifrit')
+              combatantNames = [ifritLocaleNames[data.lang]];
+            else
+              combatantNames = [raktapaksaLocaleNames[data.lang]];
+      
+            let combatantData = await window.callOverlayHandler({
+              call: 'getCombatants',
+              names: combatantNames,
+            });
+              
+            // if we could not retrieve combatant data, the
+            // trigger will not work, so just resume promise here.
+            if (!(combatantData !== null &&
+              combatantData.combatants &&
+              combatantData.combatants.length)) {
+              // console.log("Issue obtaining combatantData!");
+              data.safeZone = null;
+              res();
+            }
+            
+            // console.log("Obtained combatantData!");
+      
+            // we need to filter for the Ifrit with the highest ID
+            // since that one is always the safe spot.
+            let sortedCombatants = combatantData.combatants.sort((a, b) => a.ID - b.ID);
+            let currentHighestCombatant = sortedCombatants.pop();
+      
+            // all variation ranges for all the 9 ball positions for the kicking actors
+            // north      x: 96-104   y: 85-93
+            // northeast  x: 107-115  y: 85-93
+            // northwest  x: 85-93    y: 85-93
+            // east       x: 107-115  y: 96-104
+            // west       x: 85-93    y: 96-104
+            // south      x: 96-104   y: 107-115
+            // southeast  x: 107-115  y: 107-115
+            // southwest  x: 85-93    y: 107-115
+            let safeZoneObj1 = { en: '', de: '' };
+            let safeZoneObj2 = { en: '', de: '' };
+		   
+            // don't need to go through all the posibilities,
+            // only those 4 ifs do reflect the above positions
+            if (currentHighestCombatant.PosY > 84 && currentHighestCombatant.PosY < 94) {
+              safeZoneObj1 = {
+                en: 'north',
+                de: 'nord',
+              };
+            } else if (currentHighestCombatant.PosY > 106 && currentHighestCombatant.PosY < 116) {
+              safeZoneObj1 = {
+                en: 'south',
+                de: 'süd',
+              };
+            }
+		   
+            if (currentHighestCombatant.PosX > 84 && currentHighestCombatant.PosX < 94) {
+              safeZoneObj2 = {
+                en: 'west',
+                de: 'west',
+              };
+            } else if (currentHighestCombatant.PosX > 106 && currentHighestCombatant.PosX < 116) {
+              safeZoneObj2 = {
+                en: 'east',
+                de: 'ost',
+              };
+            }
+		   
+            data.safeZone = {
+              en: safeZoneObj1.en + safeZoneObj2.en,
+              de: safeZoneObj1.de + safeZoneObj2.de,
+            };
+
+            // console.log("Raw Data for " + data.phase);
+            // sortedCombatants.forEach(function (item, index) {
+            //     console.log("Index: " + index + " ID: " + item.ID + " PosX: " + item.PosX + " PosY: " + item.PosY);
+            // });
+
+            // console.log("Final Result");
+            // console.log("currentHighestCombatant.PosX: " + currentHighestCombatant.PosX);
+            // console.log("currentHighestCombatant.PosY: " + currentHighestCombatant.PosY);
+            // console.log("safeZone: " + data.safeZone.en);
+            
+            switch(data.safeZone.en) {
+              case "north":
+                data.safeZone.en = "Bait, then Alpha";
+                break;
+              case "northeast":
+                data.safeZone.en = "Bait, then Two";
+                break;
+              case "east":
+                data.safeZone.en = "Bait, then Bravo";
+                break;  
+              case "southeast":
+                data.safeZone.en = "Bait, then Four";
+                break;  
+              case "south":
+                data.safeZone.en = "Bait, then Charlie";
+                break;  
+              case "southwest":
+                data.safeZone.en = "Bait, then Three";
+                break;  
+              case "west":
+                data.safeZone.en = "Bait, then Delta";
+                break;  
+              case "northwest":
+                data.safeZone.en = "Bait, then One";
+                break;  
+            }
+            
+            // console.log("Modified safeZone: " + data.safeZone.en);
+            
+            res();
+          });
+      
+          return p;
+        },
+        infoText: function(data) {
+          return data.safeZone === null ? '???' : data.safeZone;
+        },
       },
     ]
   }
-
 ];
 
 // Per trigger options.  By default, each trigger uses the global options
