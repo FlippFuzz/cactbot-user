@@ -108,7 +108,8 @@ Options.DisabledTriggers = {
   'RubyEx Change of Heart' : true,
   'RubyEx Pall of Rage' : true,
   'RubyEx Pall of Grief' : true,
-  'E6S Strike Spark' : true
+  'E6S Strike Spark' : true,
+  'E5S Stepped Leader Spread' : true
 };
 
 
@@ -888,6 +889,23 @@ Options.Triggers = [
         alertText: {
           en: 'Stack for Donut Stepped Leader', 
         }
+      }
+    ],
+    triggers: [
+      {
+        // Cactbot v0.16.12 made this too slow. Reverted to pre-v0.16.12 trigger.
+        id: 'E5S Stepped Leader Spread v2',
+        regex: Regexes.startsUsing({ id: '4BC6', source: 'Ramuh', capture: false }),
+        regexDe: Regexes.startsUsing({ id: '4BC6', source: 'Ramuh', capture: false }),
+        regexFr: Regexes.startsUsing({ id: '4BC6', source: 'Ramuh', capture: false }),
+        regexJa: Regexes.startsUsing({ id: '4BC6', source: 'ラムウ', capture: false }),
+        regexKo: Regexes.startsUsing({ id: '4BC6', source: '라무', capture: false }),
+        regexCn: Regexes.startsUsing({ id: '4BC6', source: '拉姆', capture: false }),
+        condition: function(data) {
+          return !data.furysBoltActive;
+        },
+        delaySeconds: 3.0,
+        response: Responses.spread('alarm'),
       }
     ]
   }, 
