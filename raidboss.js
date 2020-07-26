@@ -109,7 +109,10 @@ Options.DisabledTriggers = {
   'RubyEx Pall of Rage' : true,
   'RubyEx Pall of Grief' : true,
   'E6S Strike Spark' : true,
-  'E5S Stepped Leader Spread' : true
+  'E5S Stepped Leader Spread' : true,
+  'E8S Hallowed Wings Knockback' : true,
+  'E8S Hallowed Wings Right' : true,
+  'E8S Hallowed Wings Left' : true
 };
 
 
@@ -1073,7 +1076,7 @@ Options.Triggers = [
             // southwest  x: 85-93    y: 107-115
             let safeZoneObj1 = { en: '', de: '' };
             let safeZoneObj2 = { en: '', de: '' };
-		   
+           
             // don't need to go through all the posibilities,
             // only those 4 ifs do reflect the above positions
             if (currentHighestCombatant.PosY > 84 && currentHighestCombatant.PosY < 94) {
@@ -1087,7 +1090,7 @@ Options.Triggers = [
                 de: 'süd',
               };
             }
-		   
+           
             if (currentHighestCombatant.PosX > 84 && currentHighestCombatant.PosX < 94) {
               safeZoneObj2 = {
                 en: 'west',
@@ -1099,7 +1102,7 @@ Options.Triggers = [
                 de: 'ost',
               };
             }
-		   
+           
             data.safeZone = {
               en: safeZoneObj1.en + safeZoneObj2.en,
               de: safeZoneObj1.de + safeZoneObj2.de,
@@ -1117,28 +1120,28 @@ Options.Triggers = [
             
             switch(data.safeZone.en) {
               case "north":
-                data.safeZone.en = "Bait, then Alpha";
+                data.safeZone.en = "Alpha";
                 break;
               case "northeast":
-                data.safeZone.en = "Bait, then Two";
+                data.safeZone.en = "Two";
                 break;
               case "east":
-                data.safeZone.en = "Bait, then Bravo";
+                data.safeZone.en = "Bravo";
                 break;  
               case "southeast":
-                data.safeZone.en = "Bait, then Four";
+                data.safeZone.en = "Four";
                 break;  
               case "south":
-                data.safeZone.en = "Bait, then Charlie";
+                data.safeZone.en = "Charlie";
                 break;  
               case "southwest":
-                data.safeZone.en = "Bait, then Three";
+                data.safeZone.en = "Three";
                 break;  
               case "west":
-                data.safeZone.en = "Bait, then Delta";
+                data.safeZone.en = "Delta";
                 break;  
               case "northwest":
-                data.safeZone.en = "Bait, then One";
+                data.safeZone.en = "One";
                 break;  
             }
             
@@ -1153,6 +1156,320 @@ Options.Triggers = [
           return data.safeZone === null ? '???' : data.safeZone;
         },
       },
+    ]
+  },
+/*  {
+    // E7 NM
+    zoneRegex: /^Eden's Verse: Iconoclasm$/,
+    triggers: [
+      {
+        id: 'E7 Light or Dark Course',
+        regex: Regexes.abilityFull({ source: 'Unforgiven Idolatry', id: ['4C3C', '4E63', '4C40', '4C3E', '4C22', '4C23'], capture: false }),
+        promise: function(data) {
+          let p = new Promise(async (res) => {
+            let combatantData = await window.callOverlayHandler({
+              call: 'getCombatants',
+            });
+
+            console.log(JSON.stringify(combatantData, null, 2));
+            
+            res();
+          });
+
+          return p;
+        }
+      }
+    ]
+  },*/
+  {
+    // E7S
+    zoneRegex: /^Eden's Verse: Iconoclasm \(Savage\)$/,
+    timeline: `
+      233.0 "Move Add"
+      256.0 "Move Add"
+      280.0 "Move Add"
+      303.0 "Move Add Slightly"
+    `,
+    timelineTriggers: [
+      {
+        id: 'E7S Move Add',
+        regex: /Move Add/,
+        alertText: {
+          en: 'Move Add',
+        }
+      },
+      {
+        id: 'E7S Move Add Slightly',
+        regex: /Move Add Slightly/,
+        alertText: {
+          en: 'Move Add Slightly',
+        }
+      },
+    ],
+    triggers: [
+      {
+        id: 'E7S Words of Motion State Tracker',
+        regex: Regexes.startsUsing({ source: 'The Idol of Darkness', id: '4C2B', capture: false }),
+        run: function(data) {
+          // Data is reset every pull. Initialize it if it does not exist.
+          data.wordsOfMotionState = data.wordsOfMotionState || "Start";
+          
+          let previousState = data.wordsOfMotionState;
+          switch(data.wordsOfMotionState) {
+            case "Start":
+              data.wordsOfMotionState = "Phase 1 Portals";
+              data.phase1PortalsState = "Start";
+              data.phase1PortalsPrevTime = -1;
+              data.phase1PortalsSafeSpot = "";
+              data.phase1PortalsCallout = "";
+              data.phase1PortalsCalloutDone = false;
+              break;
+            case "Phase 1 Portals":
+              data.wordsOfMotionState = "??? TODO Levi Spread";
+              break;
+          }
+          console.log("E7S Words of Motion State Tracker: previousState: " + previousState + ", newState: " + data.wordsOfMotionState);
+        }    
+      },
+      {
+        id: 'E7S Light or Dark Course',
+        regex: Regexes.abilityFull({ source: 'Unforgiven Idolatry', id: ['4C5A', '4C62', '4C63', '4C64'], capture: false }),
+        condition: function(data, matches) {
+          // console.log(JSON.stringify(matches, null, 2));
+          if(data.wordsOfMotionState == "Phase 1 Portals") {
+            // Example result from matches
+            // Doing capture: false because there's a need to obtain the time and the automatic capture doesn't include time.
+            // [22:05:32.667] 15:4000EA63:Unforgiven Idolatry:4C62:Light's Course:E0000000::0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:::::::::::148000:148000:10000:10000:0:1000:95:75:0:-4.792213E-05:00004080
+            let result = matches[0].match(/\[(.*?)\].*:(.*):(.*):(.*):(.*):(.*)/);
+            // console.log(JSON.stringify(result, null, 2))
+            let currentTime = (new Date('1970-01-01T' + result[1] + 'Z')).getTime();
+            let x = parseFloat(result[2]);
+            let y = parseFloat(result[3]);
+            
+            //console.log("x: " + x + ", y: " + y + ", currentTime: " + currentTime + ", prevTime: " + data.phase1PortalsPrevTime);
+                        
+            // We will move to the next State if time greater than previous state by 1 second.
+            if(currentTime > data.phase1PortalsPrevTime + 1000) {
+              data.phase1PortalsCalloutDone = false; // Reset this. We only want to callout once for each state.
+              
+              let previousState = data.phase1PortalsState;
+              data.phase1PortalsPrevTime = currentTime;
+              switch(data.phase1PortalsState) {
+                case "Start":
+                  data.phase1PortalsState = "After Front to Back 1";
+                  break;
+                case "After Front to Back 1": // We are tracking the Light/Dark Course at the end of each state. So the states are actually AFTER the course AoEs.
+                  data.phase1PortalsState = "After Front to Back 2";
+                  break;
+                case "After Front to Back 2":
+                  data.phase1PortalsState = "After First Set Right to Left 1";
+                  break;
+                case "After First Set Right to Left 1":
+                  data.phase1PortalsState = "After First Set Right to Left 2";
+                  break;
+                case "After First Set Right to Left 2":
+                  data.phase1PortalsState = "After Second Set Right to Left 1";
+                  break;
+                case "After Second Set Right to Left 1":
+                  data.phase1PortalsState = "After Second Set Right to Left 2";
+                  break;
+                case "After Second Set Right to Left 2":
+                  data.phase1PortalsState = "After Third Set Right to Left 1";
+                  break;
+                case "After Third Set Right to Left 1":
+                  data.phase1PortalsState = "After Third Set Right to Left 2";
+                  break;
+                case "After Third Set Right to Left 2":
+                  data.phase1PortalsState = "End";
+                  break;
+              }
+              console.log("STATE CHANGE. NEW: " + data.phase1PortalsState + " OLD: " + previousState);
+            }
+            
+            console.log(((new Date(currentTime)).toISOString().split("T"))[1] + " Light/Dark Course. x: " + x + ", y: " + y + ", State: " + data.phase1PortalsState);
+            
+            // Perform logic based on current state
+            switch(data.phase1PortalsState) {
+              case "After Front to Back 1":
+                // Figure out which was fired first
+                if(Math.abs(x - 95) < 1) { // Probably fine to do a direct comparision against 95. This is just in case position is off by a little.
+                  // Red will fire first.
+                  data.phase1PortalsSafeSpot = "Back";
+                  data.phase1PortalsCallout = "Go to Blue First";
+                  console.log("phase1PortalsSafeSpot: " + data.phase1PortalsSafeSpot);
+                  
+                  if(data.phase1PortalsCalloutDone == false) { // Only alertText once in each state.
+                      data.phase1PortalsCalloutDone = true;
+                      return true; // Perform alertText.
+                  } else {
+                      return false;
+                  }
+                }
+                
+                if(Math.abs(x - 105) < 1) {
+                  // Blue will fire first.
+                  data.phase1PortalsSafeSpot = "Front";
+                  data.phase1PortalsCallout = "Go to Red First";
+                  console.log("phase1PortalsSafeSpot: " + data.phase1PortalsSafeSpot);
+                  
+                  if(data.phase1PortalsCalloutDone == false) { // Only alertText once in each state.
+                    data.phase1PortalsCalloutDone = true;
+                    return true; // Perform alertText.
+                  } else {
+                    return false;
+                  }                
+                }           
+                break;
+                
+              case "After Front to Back 2":
+                // Nothing to do                
+                // Can alertText safe spot again.
+                if(data.phase1PortalsCalloutDone == false) { // Only alertText once in each state.
+                  data.phase1PortalsCallout = data.phase1PortalsSafeSpot;
+                  data.phase1PortalsCalloutDone = true;
+                  return true; // Perform alertText.
+                } else {
+                  return false;
+                }                
+                break;
+                
+              case "zAfter First Set Right to Left 1":
+              case "zAfter Second Set Right to Left 1":
+              case "zAfter Third Set Right to Left 1":
+                // alertText + update next position. Only do this ONCE in this state.
+                if(data.phase1PortalsCalloutDone == false) {
+                  if(Math.abs(y - 85) < 1) { 
+                    data.phase1PortalsCallout = "Back";
+                    data.phase1PortalsCalloutDone = true;
+                    return true;
+                  } else if (Math.abs(y - 95) < 1) { 
+                    data.phase1PortalsSafeSpot = "Front";
+                    data.phase1PortalsCalloutDone = true;
+                    return true;
+                  }
+                }
+                return false;
+                break;
+              case "zAfter First Set Right to Left 2":
+              case "zAfter Second Set Right to Left 2":
+                if(data.phase1PortalsCalloutDone == false) {
+                  data.phase1PortalsCallout = "Remember to check colours";
+                  data.phase1PortalsCalloutDone = true;
+                  return true;
+                }
+                break;
+            }
+          }
+          return false; // Don't perform alertText
+        },
+        alertText: function(data, matches) {
+            console.log("alertText: " + data.phase1PortalsCallout);
+            return data.phase1PortalsCallout;
+        }
+      }
+    ]
+  },
+  {
+    // E8S
+    zoneRegex: /^Eden's Verse: Refulgence \(Savage\)$/,
+    timeline: `
+      494.0 "Stack for Akh Rhai"
+    `,
+    timelineTriggers: [
+	  {
+        id: 'E8S Stack for Akh Rhai',
+        regex: /Stack for Akh Rhai/,
+        alertText: {
+          en: 'Stack for Akh Rhai',
+        }
+      }
+    ],
+    triggers: [
+      {
+        id: 'E8S Mirror Mirror 3 Blue',
+        regex: /E8S Mirror Mirror 3 Blue/,
+        alertText: function(data, matches) {
+			data.e8sMirrorMirror3Colour = "Blue";
+            return "" + data.e8sMirrorMirror3Colour;
+        }
+      },
+      {
+        id: 'E8S Mirror Mirror 3 Red',
+        regex: /E8S Mirror Mirror 3 Red/,
+        alertText: function(data, matches) {
+			data.e8sMirrorMirror3Colour = "Red";
+            return "" + data.e8sMirrorMirror3Colour;
+        }       
+      },
+      {
+        id: 'E8S Hallowed Wings Left v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D75', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D75', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D75', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D75', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D75', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D75', capture: false }),
+		durationSeconds: 9,
+        alertText: function(data, matches) {
+            var result = "Right";
+            // Check whether this is the first hallowed wings 
+            // First hallowed wings means this is mirror mirror 3.
+            data.e8sFirstHallowedWings = data.e8sFirstHallowedWings || "yes"; // Probably more efficient if this is boolean
+            if(data.e8sFirstHallowedWings == "yes") {
+                data.e8sMirrorMirror3Colour = data.e8sMirrorMirror3Colour || "unknown";
+                if(data.e8sMirrorMirror3Colour == "Red") {
+                    result = "North, B to A\nSouth, A to D";
+                } else if(data.e8sMirrorMirror3Colour == "Blue") {
+                    result = "North, C to D\nSouth, D to A";
+                } else {
+					result = "Red, North, B to A\nRed, South, A to D\nBlue, North, C to D\nBlue, South, D to A\n";
+				}
+            }
+            data.e8sFirstHallowedWings = "no";
+            return result;
+        }
+      },
+      {
+        id: 'E8S Hallowed Wings Right v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D76', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D76', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D76', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D76', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D76', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D76', capture: false }),
+		durationSeconds: 9,
+        alertText: function(data, matches) {
+            var result = "Left";
+            // Check whether this is the first hallowed wings 
+            // First hallowed wings means this is mirror mirror 3.
+            data.e8sFirstHallowedWings = data.e8sFirstHallowedWings || "yes"; // Probably more efficient if this is boolean
+            if(data.e8sFirstHallowedWings == "yes") {
+                data.e8sMirrorMirror3Colour = data.e8sMirrorMirror3Colour || "unknown";
+                if(data.e8sMirrorMirror3Colour == "Red") {
+                    result = "North, D to C\nSouth, C to B";
+                } else if(data.e8sMirrorMirror3Colour == "Blue") {
+                    result = "North, A to B\nSouth, B to C";
+                } else {
+					result = "Red, North, D to C\nRed, South, C to B\nBlue, North, A to B\nBlue, South, B to C";
+				}
+            }
+            data.e8sFirstHallowedWings = "no";
+            return result;
+        }
+      },
+      {
+        id: 'E8S Hallowed Wings Knockback v2', // Cactbot default doesn't seem to work. Just enable permanently
+        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D77', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D77', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D77', capture: false }),
+        // This gives a warning within 1.4 seconds, so you can hit arm's length.
+        delaySeconds: 8.6,
+        durationSeconds: 1.4,
+        response: Responses.knockback(),
+      }
     ]
   }
 ];
