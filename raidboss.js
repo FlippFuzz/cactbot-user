@@ -1465,22 +1465,21 @@ Options.Triggers = [
         netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D77', capture: false }),
         netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D77', capture: false }),
         netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D77', capture: false }),
-        durationSeconds: 6,
+        durationSeconds: 3,
         alertText: function(data, matches) {
-          console.log("E8S Hallowed Wings Prepare to Arms Length");
-          return 'Prepare to Arms Length';
+          console.log("E8S Hallowed Wings Prepare");
+          return 'Prepare!';
         }
       },
       {
-        id: 'E8S Hallowed Wings Arms Length', // Cactbot default doesn't seem to work. Just enable permanently
-        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
-        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
-        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
-        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D77', capture: false }),
-        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D77', capture: false }),
-        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D77', capture: false }),
-        // This gives a warning within 1.4 seconds, so you can hit arm's length.
-        delaySeconds: 8.6,
+        id: 'E8S Hallowed Wings Arms Length', // Cactbot default doesn't work
+        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4DBD', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4DBD', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4DBD', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4DBD', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4DBD', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4DBD', capture: false }),
+        delaySeconds: 4.0,
         durationSeconds: 3,
         alertText: function(data, matches) {
           console.log("E8S Hallowed Wings Arms Length");
