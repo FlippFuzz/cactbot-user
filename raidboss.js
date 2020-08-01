@@ -1376,7 +1376,7 @@ Options.Triggers = [
       494.0 "Stack for Akh Rhai"
     `,
     timelineTriggers: [
-	  {
+      {
         id: 'E8S Stack for Akh Rhai',
         regex: /Stack for Akh Rhai/,
         alertText: {
@@ -1389,7 +1389,7 @@ Options.Triggers = [
         id: 'E8S Mirror Mirror 3 Blue',
         regex: /E8S Mirror Mirror 3 Blue/,
         alertText: function(data, matches) {
-			data.e8sMirrorMirror3Colour = "Blue";
+            data.e8sMirrorMirror3Colour = "Blue";
             return "" + data.e8sMirrorMirror3Colour;
         }
       },
@@ -1397,7 +1397,7 @@ Options.Triggers = [
         id: 'E8S Mirror Mirror 3 Red',
         regex: /E8S Mirror Mirror 3 Red/,
         alertText: function(data, matches) {
-			data.e8sMirrorMirror3Colour = "Red";
+            data.e8sMirrorMirror3Colour = "Red";
             return "" + data.e8sMirrorMirror3Colour;
         }       
       },
@@ -1409,7 +1409,7 @@ Options.Triggers = [
         netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D75', capture: false }),
         netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D75', capture: false }),
         netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D75', capture: false }),
-		durationSeconds: 9,
+        durationSeconds: 9,
         alertText: function(data, matches) {
             var result = "Right";
             // Check whether this is the first hallowed wings 
@@ -1422,8 +1422,8 @@ Options.Triggers = [
                 } else if(data.e8sMirrorMirror3Colour == "Blue") {
                     result = "North, C to D\nSouth, D to A";
                 } else {
-					result = "Red, North, B to A\nRed, South, A to D\nBlue, North, C to D\nBlue, South, D to A\n";
-				}
+                    result = "Red, North, B to A\nRed, South, A to D\nBlue, North, C to D\nBlue, South, D to A\n";
+                }
             }
             data.e8sFirstHallowedWings = "no";
             return result;
@@ -1437,7 +1437,7 @@ Options.Triggers = [
         netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D76', capture: false }),
         netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D76', capture: false }),
         netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D76', capture: false }),
-		durationSeconds: 9,
+        durationSeconds: 9,
         alertText: function(data, matches) {
             var result = "Left";
             // Check whether this is the first hallowed wings 
@@ -1450,15 +1450,29 @@ Options.Triggers = [
                 } else if(data.e8sMirrorMirror3Colour == "Blue") {
                     result = "North, A to B\nSouth, B to C";
                 } else {
-					result = "Red, North, D to C\nRed, South, C to B\nBlue, North, A to B\nBlue, South, B to C";
-				}
+                    result = "Red, North, D to C\nRed, South, C to B\nBlue, North, A to B\nBlue, South, B to C";
+                }
             }
             data.e8sFirstHallowedWings = "no";
             return result;
         }
       },
       {
-        id: 'E8S Hallowed Wings Knockback v2', // Cactbot default doesn't seem to work. Just enable permanently
+        id: 'E8S Hallowed Wings Prepare to Arms Length', // Cactbot default doesn't seem to work. Just enable permanently
+        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D77', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D77', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D77', capture: false }),
+        durationSeconds: 6,
+        alertText: function(data, matches) {
+          console.log("E8S Hallowed Wings Prepare to Arms Length");
+          return 'Prepare to Arms Length';
+        }
+      },
+      {
+        id: 'E8S Hallowed Wings Arms Length', // Cactbot default doesn't seem to work. Just enable permanently
         netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
         netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
         netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
@@ -1467,8 +1481,11 @@ Options.Triggers = [
         netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D77', capture: false }),
         // This gives a warning within 1.4 seconds, so you can hit arm's length.
         delaySeconds: 8.6,
-        durationSeconds: 1.4,
-        response: Responses.knockback(),
+        durationSeconds: 3,
+        alertText: function(data, matches) {
+          console.log("E8S Hallowed Wings Arms Length");
+          return 'Arms Length';
+        }
       }
     ]
   }
