@@ -1465,7 +1465,6 @@ Options.Triggers = [
         netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D77', capture: false }),
         netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D77', capture: false }),
         netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D77', capture: false }),
-        durationSeconds: 3,
         alertText: function(data, matches) {
           console.log("E8S Hallowed Wings Prepare");
           return 'Prepare!';
@@ -1473,14 +1472,8 @@ Options.Triggers = [
       },
       {
         id: 'E8S Hallowed Wings Arms Length', // Cactbot default doesn't work
-        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4DBD', capture: false }),
-        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4DBD', capture: false }),
-        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4DBD', capture: false }),
-        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4DBD', capture: false }),
-        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4DBD', capture: false }),
-        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4DBD', capture: false }),
-        delaySeconds: 4.0,
-        durationSeconds: 3,
+        netRegex: NetRegexes.startsUsing({ source: 'Frozen Mirror', id: '4DBD', capture: false }),
+        delaySeconds: 3.0,
         alertText: function(data, matches) {
           console.log("E8S Hallowed Wings Arms Length");
           return 'Arms Length';
