@@ -1382,7 +1382,7 @@ Options.Triggers = [
       567.0 "Green Knockback Mirror"
       572.0 "Red Knockback Mirror"
 	  
-	  592.0 "Back to Mid"
+	  590.0 "Back to Mid"
       595.0 "Stack South for Akh Rhai"
       611.0 "Stack North for Akh Rhai"
 	  619.0 "Split Stack for Akh Morn"
