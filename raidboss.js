@@ -112,7 +112,8 @@ Options.DisabledTriggers = {
   'E5S Stepped Leader Spread' : true,
   'E8S Hallowed Wings Knockback' : true,
   'E8S Hallowed Wings Right' : true,
-  'E8S Hallowed Wings Left' : true
+  'E8S Hallowed Wings Left' : true,
+  'E8S Forgetful Tank Second Frost' : true
 };
 
 
@@ -1373,18 +1374,127 @@ Options.Triggers = [
     // E8S
     zoneRegex: /^Eden's Verse: Refulgence \(Savage\)$/,
     timeline: `
-      494.0 "Stack for Akh Rhai"
+      495.0 "Stack South for Akh Rhai"
+	  
+	  545.0 "Move to intercardinal"
+	  
+      562.0 "Blue Knockback Mirror"
+      567.0 "Green Knockback Mirror"
+      572.0 "Red Knockback Mirror"
+	  
+	  592.0 "Back to Mid"
+      595.0 "Stack South for Akh Rhai"
+      611.0 "Stack North for Akh Rhai"
+	  619.0 "Split Stack for Akh Morn"
     `,
     timelineTriggers: [
       {
-        id: 'E8S Stack for Akh Rhai',
-        regex: /Stack for Akh Rhai/,
+        id: 'E8S Stack South for Akh Rhai',
+        regex: /Stack South for Akh Rhai/,
         alertText: {
-          en: 'Stack for Akh Rhai',
+          en: 'Stack South for Akh Rhai',
+        }
+      },
+      {
+        id: 'E8S Stack North for Akh Rhai',
+        regex: /Stack North for Akh Rhai/,
+        alertText: {
+          en: 'Stack North for Akh Rhai',
+        }
+      },
+      {
+        id: 'E8S Split Stack for Akh Morn',
+        regex: /Split Stack for Akh Morn/,
+        alertText: {
+          en: 'Split Stack for Akh Morn',
+        }
+      },
+      {
+        id: 'E8S Move to intercardinal',
+        regex: /Move to intercardinal/,
+        alertText: {
+          en: 'Move to intercardinal',
+        }
+      },
+	  {
+        id: 'E8S Blue Knockback Mirror',
+        regex: /Blue Knockback Mirror/,
+        alertText: {
+          en: 'Boss to Blue. Look away from boss and blue.',
+        }
+      },
+	  {
+        id: 'E8S Green Knockback Mirror',
+        regex: /Green Knockback Mirror/,
+        alertText: {
+          en: 'Look away from green',
+        }
+      },
+	  {
+        id: 'E8S Red Knockback Mirror',
+        regex: /Red Knockback Mirror/,
+        alertText: {
+          en: 'Look away from Red',
+        }
+      },
+	  {
+        id: 'E8S Back to Mid',
+        regex: /Back to Mid/,
+        alertText: {
+          en: 'Back to Mid',
         }
       }
     ],
     triggers: [
+	  {
+        id: 'E8S Forgetful Tank Second Frost v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D6[67]', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D6[67]', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D6[67]', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D6[67]', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D6[67]', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D6[67]', capture: false }),
+        condition: (data) => data.role == 'tank',
+        delaySeconds: 44,
+        durationSeconds: 9,
+        suppressSeconds: 80,
+        infoText: function(data) {
+          if (data.firstFrost == 'driving') {
+            return {
+              en: 'Biting Frost Next',
+              de: 'Frosthieb als nächstes',
+              fr: 'Taillade de givre bientôt',
+              cn: '下次攻击前侧面',
+              ko: '다음: Biting/スラッシュ',
+            };
+          }
+          return {
+            en: 'Driving Frost Next',
+            de: 'Froststoß als nächstes',
+            fr: 'Percée de givre bientôt',
+            cn: '下次攻击后面',
+            ko: '다음: Driving/スラスト',
+          };
+        },
+        tts: function(data) {
+          if (data.firstFrost == 'driving') {
+            return {
+              en: 'Biting Frost Next',
+              de: 'Frosthieb als nächstes',
+              fr: 'Taillade de givre bientôt',
+              cn: '下次攻击前侧面',
+              ko: '다음: 바이팅 스라슈',
+            };
+          }
+          return {
+            en: 'Driving Frost Next',
+            de: 'Froststoß als nächstes',
+            fr: 'Percée de givre bientôt',
+            cn: '下次攻击后面',
+            ko: '다음: 드라이빙 스라스토',
+          };
+        }
+	  },
       {
         id: 'E8S Mirror Mirror 3 Blue',
         regex: /E8S Mirror Mirror 3 Blue/,
@@ -1458,7 +1568,7 @@ Options.Triggers = [
         }
       },
       {
-        id: 'E8S Hallowed Wings Prepare to Arms Length', // Cactbot default doesn't seem to work. Just enable permanently
+        id: 'E8S Hallowed Wings Move to Edge for Uptimne ',
         netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
         netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
         netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D77', capture: false }),
@@ -1466,16 +1576,22 @@ Options.Triggers = [
         netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D77', capture: false }),
         netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D77', capture: false }),
         alertText: function(data, matches) {
-          console.log("E8S Hallowed Wings Prepare");
+          return 'Move to Edge and activate cooldown';
+        }
+      },
+      {
+        id: 'E8S Hallowed Wings Prepare to Arms Length', // Cactbot default doesn't work
+        netRegex: NetRegexes.startsUsing({ source: 'Frozen Mirror', id: '4DBD', capture: false }),
+        delaySeconds: 0,
+        alertText: function(data, matches) {
           return 'Prepare!';
         }
       },
       {
         id: 'E8S Hallowed Wings Arms Length', // Cactbot default doesn't work
         netRegex: NetRegexes.startsUsing({ source: 'Frozen Mirror', id: '4DBD', capture: false }),
-        delaySeconds: 3.0,
+        delaySeconds: 2.5,
         alertText: function(data, matches) {
-          console.log("E8S Hallowed Wings Arms Length");
           return 'Arms Length';
         }
       }
