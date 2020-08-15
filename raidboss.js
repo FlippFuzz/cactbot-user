@@ -114,7 +114,12 @@ Options.DisabledTriggers = {
   'E8S Hallowed Wings Right' : true,
   'E8S Hallowed Wings Left' : true,
   'E8S Forgetful Tank Second Frost' : true,
-  'WOLEx Quintuplecast Resolve': true
+  'WOLEx Quintuplecast Resolve': true,
+  'WOLEx Summon Wyrm': true,
+  'WOLEx Spectral Black Mage / White Mage': true,
+  'WOLEx Summoner / Warrior': true,
+  'WOLEx Spectral Bard / Dark Knight': true,
+  'WOLEx Spectral Ninja': true
 };
 
 
@@ -1606,15 +1611,59 @@ Options.Triggers = [
     timelineTriggers: [
     ],
     triggers: [
-	  {
+      {
         id: 'WOLEx Quintuplecast Resolve v2',
         netRegex: NetRegexes.ability({ source: 'Warrior Of Light', id: '4EEF', capture: false }),
-		durationSeconds: 15,
+        durationSeconds: 15,
         alertText: function(data) {
           let msg = data.quintuplecasts.join(' => ');
           delete data.quintuplecasts;
           return msg;
         }
+      },
+      {
+        // Increasing this to alarm text because there are instances whereby this was overwritten by another infoText.
+        id: 'WOLEx Summon Wyrm v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Warrior Of Light', id: '4F41', capture: false }),
+        delaySeconds: 6,
+        alarmText: {
+          en: 'Avoid Wyrm Dash',
+        },
+      },
+      {
+        // Modifying these to have more useful callouts
+        id: 'WOLEx Spectral Black Mage / White Mage v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Spectral Black Mage', id: '4F3D', capture: false }),
+        condition: (data) => data.ultimateSeen,
+        infoText: {
+          en: 'Towers (Black Mage + White Mage)',
+        },
+      },
+      {
+        id: 'WOLEx Summoner / Warrior v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Spectral Summoner', id: '4F3F', capture: false }),
+        condition: (data) => data.ultimateSeen,
+        infoText: {
+          en: 'Bahamut Corners (Summoner + Warrior)',
+        },
+      },
+      {
+        id: 'WOLEx Spectral Bard / Dark Knight v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Spectral Dark Knight', id: '4F3A', capture: false }),
+        condition: (data) => data.ultimateSeen,
+        infoText: {
+          en: 'Bubble Corners (Dark Knight + Bard)',
+        },
+      },
+      {
+        id: 'WOLEx Spectral Ninja v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Spectral Ninja', id: '4EFD', capture: false }),
+        infoText: {
+          en: 'Pair Stacks and Knockback (Ninja)',
+        },
+        run: function(data) {
+          data.ninja = true;
+        },
       }
     ]
   }
