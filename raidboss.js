@@ -113,7 +113,8 @@ Options.DisabledTriggers = {
   'E8S Hallowed Wings Knockback' : true,
   'E8S Hallowed Wings Right' : true,
   'E8S Hallowed Wings Left' : true,
-  'E8S Forgetful Tank Second Frost' : true
+  'E8S Forgetful Tank Second Frost' : true,
+  'WOLEx Quintuplecast Resolve': true
 };
 
 
@@ -1605,6 +1606,16 @@ Options.Triggers = [
     timelineTriggers: [
     ],
     triggers: [
+	  {
+        id: 'WOLEx Quintuplecast Resolve v2',
+        netRegex: NetRegexes.ability({ source: 'Warrior Of Light', id: '4EEF', capture: false }),
+		durationSeconds: 15,
+        alertText: function(data) {
+          let msg = data.quintuplecasts.join(' => ');
+          delete data.quintuplecasts;
+          return msg;
+        }
+      }
     ]
   }
 ];
