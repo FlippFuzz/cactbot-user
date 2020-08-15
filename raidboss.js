@@ -1375,17 +1375,17 @@ Options.Triggers = [
     zoneRegex: /^Eden's Verse: Refulgence \(Savage\)$/,
     timeline: `
       495.0 "Stack South for Akh Rhai"
-	  
-	  545.0 "Move to intercardinal"
-	  
+      
+      545.0 "Move to intercardinal"
+      
       562.0 "Blue Knockback Mirror"
       567.0 "Green Knockback Mirror"
       572.0 "Red Knockback Mirror"
-	  
-	  590.0 "Back to Mid"
+      
+      590.0 "Back to Mid"
       595.0 "Stack South for Akh Rhai"
       611.0 "Stack North for Akh Rhai"
-	  619.0 "Split Stack for Akh Morn"
+      619.0 "Split Stack for Akh Morn"
     `,
     timelineTriggers: [
       {
@@ -1416,28 +1416,28 @@ Options.Triggers = [
           en: 'Move to intercardinal',
         }
       },
-	  {
+      {
         id: 'E8S Blue Knockback Mirror',
         regex: /Blue Knockback Mirror/,
         alertText: {
           en: 'Boss to Blue. Look away from boss and blue.',
         }
       },
-	  {
+      {
         id: 'E8S Green Knockback Mirror',
         regex: /Green Knockback Mirror/,
         alertText: {
           en: 'Look away from green',
         }
       },
-	  {
+      {
         id: 'E8S Red Knockback Mirror',
         regex: /Red Knockback Mirror/,
         alertText: {
           en: 'Look away from Red',
         }
       },
-	  {
+      {
         id: 'E8S Back to Mid',
         regex: /Back to Mid/,
         alertText: {
@@ -1446,7 +1446,7 @@ Options.Triggers = [
       }
     ],
     triggers: [
-	  {
+      {
         id: 'E8S Forgetful Tank Second Frost v2',
         netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D6[67]', capture: false }),
         netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D6[67]', capture: false }),
@@ -1494,7 +1494,7 @@ Options.Triggers = [
             ko: '다음: 드라이빙 스라스토',
           };
         }
-	  },
+      },
       {
         id: 'E8S Mirror Mirror 3 Blue',
         regex: /E8S Mirror Mirror 3 Blue/,
@@ -1595,6 +1595,16 @@ Options.Triggers = [
           return 'Arms Length';
         }
       }
+    ]
+  },
+  {
+    // WOL EX
+    zoneId: ZoneId.TheSeatOfSacrificeExtreme,
+    timeline: `
+    `,
+    timelineTriggers: [
+    ],
+    triggers: [
     ]
   }
 ];
