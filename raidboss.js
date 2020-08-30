@@ -114,6 +114,7 @@ Options.DisabledTriggers = {
   'E8S Hallowed Wings Right' : true,
   'E8S Hallowed Wings Left' : true,
   'E8S Forgetful Tank Second Frost' : true,
+  'E8S Holy Divided' : true,
   'WOLEx Summon Wyrm': true,
   'WOLEx Spectral Black Mage / White Mage': true,
   'WOLEx Summoner / Warrior': true,
@@ -1598,6 +1599,18 @@ Options.Triggers = [
         delaySeconds: 2.5,
         alertText: function(data, matches) {
           return 'Arms Length';
+        }
+      },
+      {
+        id: 'E8S Holy Divided v2',
+        netRegex: NetRegexes.startsUsing({ source: 'Shiva', id: '4D83', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Shiva', id: '4D83', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Shiva', id: '4D83', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'シヴァ', id: '4D83', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '希瓦', id: '4D83', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '시바', id: '4D83', capture: false }),
+        alertText: function(data, matches) {
+          return 'Middle';
         }
       }
     ]
