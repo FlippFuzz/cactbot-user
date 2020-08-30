@@ -1656,6 +1656,24 @@ Options.Triggers = [
       }
     ]
   }
+  {
+    // Shiva Unreal
+    zoneId: ZoneId.TheAkhAfahAmphitheatreUnreal,
+    timeline: `
+    `,
+    timelineTriggers: [
+	  {
+        id: 'ShivaUn Avalanche Move North',
+        regex: /Avalanche/,
+        beforeSeconds: 20,
+        alertText: {
+          en: 'Move Boss North',
+        }
+      }
+    ],
+    triggers: [
+    ]
+  },
 ];
 
 // Per trigger options.  By default, each trigger uses the global options
