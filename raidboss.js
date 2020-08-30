@@ -1590,7 +1590,7 @@ Options.Triggers = [
         netRegex: NetRegexes.startsUsing({ source: 'Frozen Mirror', id: '4DBD', capture: false }),
         delaySeconds: 0,
         alertText: function(data, matches) {
-          return 'Prepare!';
+          return 'Watch Enemy List!';
         }
       },
       {
