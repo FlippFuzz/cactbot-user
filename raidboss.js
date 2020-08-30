@@ -1466,7 +1466,7 @@ Options.Triggers = [
         infoText: function(data) {
           if (data.firstFrost == 'driving') {
             return {
-              en: 'Biting Frost Next',
+              en: 'Biting Frost - Face Boss Outwards',
               de: 'Frosthieb als nächstes',
               fr: 'Taillade de givre bientôt',
               cn: '下次攻击前侧面',
@@ -1474,7 +1474,7 @@ Options.Triggers = [
             };
           }
           return {
-            en: 'Driving Frost Next',
+            en: 'Driving Frost - Face Boss Inwards',
             de: 'Froststoß als nächstes',
             fr: 'Percée de givre bientôt',
             cn: '下次攻击后面',
