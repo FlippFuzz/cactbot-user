@@ -1623,7 +1623,9 @@ Options.Triggers = [
         // Modifying these to have more useful callouts
         id: 'WOLEx Spectral Black Mage / White Mage v2',
         netRegex: NetRegexes.startsUsing({ source: 'Spectral Black Mage', id: '4F3D', capture: false }),
-        condition: (data) => data.ultimateSeen,
+        condition: (data) => data.ultimateSeen && !data.calledSpectral,
+        preRun: (data) => data.calledSpectral = true,
+		durationSeconds: 9,
         infoText: {
           en: 'Towers (Black Mage + White Mage)',
         },
@@ -1631,7 +1633,9 @@ Options.Triggers = [
       {
         id: 'WOLEx Summoner / Warrior v2',
         netRegex: NetRegexes.startsUsing({ source: 'Spectral Summoner', id: '4F3F', capture: false }),
-        condition: (data) => data.ultimateSeen,
+        condition: (data) => data.ultimateSeen && !data.calledSpectral,
+        preRun: (data) => data.calledSpectral = true,
+		durationSeconds: 9,
         infoText: {
           en: 'Bahamut Corners (Summoner + Warrior)',
         },
@@ -1639,7 +1643,9 @@ Options.Triggers = [
       {
         id: 'WOLEx Spectral Bard / Dark Knight v2',
         netRegex: NetRegexes.startsUsing({ source: 'Spectral Dark Knight', id: '4F3A', capture: false }),
-        condition: (data) => data.ultimateSeen,
+        condition: (data) => data.ultimateSeen && !data.calledSpectral,
+        preRun: (data) => data.calledSpectral = true,
+		durationSeconds: 9,
         infoText: {
           en: 'Bubble Corners (Dark Knight + Bard)',
         },
@@ -1650,12 +1656,13 @@ Options.Triggers = [
         infoText: {
           en: 'Pair Stacks and Knockback (Ninja)',
         },
+		durationSeconds: 9,
         run: function(data) {
           data.ninja = true;
         },
       }
     ]
-  }
+  },
   {
     // Shiva Unreal
     zoneId: ZoneId.TheAkhAfahAmphitheatreUnreal,
