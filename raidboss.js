@@ -238,13 +238,16 @@ Options.Triggers = [
       },
       {
         id: 'General Reprisal',
-        regex: /:(\y{Name}):1D6F:Reprisal:/,
-        condition: function(data) {
+        netRegex: NetRegexes.ability({ id: '1D6F' }),
+        condition: function(data, matches) {
+          //if (matches.source !== data.me && !data.party.inAlliance(matches.source))
+          //  return false;
           return data.role == 'tank';
         },
         infoText: function(data, matches) {
+          let name = data.ShortName(matches.source);
           return {
-            en: 'Reprisal: ' + data.ShortName(matches[1]),
+            en: 'Reprisal: ' + name,
           };
         },
       },
