@@ -1383,6 +1383,9 @@ Options.Triggers = [
     // E8S
     zoneRegex: /^Eden's Verse: Refulgence \(Savage\)$/,
     timeline: `
+      161.0 "Threes Enter"
+      166.0 "Light Rampant Ends"
+
       495.0 "Stack South for Akh Rhai"
       
       545.0 "Move to intercardinal"
@@ -1397,6 +1400,20 @@ Options.Triggers = [
       619.0 "Split Stack for Akh Morn"
     `,
     timelineTriggers: [
+      {
+        id: 'E8S Light Rampant Threes Enter',
+        regex: /Threes Enter/,
+        alertText: {
+          en: 'Threes Enter',
+        }
+      },
+      {
+        id: 'E8S Light Rampant Ends',
+        regex: /Light Rampant Ends/,
+        alertText: {
+          en: 'Light Rampant Ends',
+        }
+      },
       {
         id: 'E8S Stack South for Akh Rhai',
         regex: /Stack South for Akh Rhai/,
