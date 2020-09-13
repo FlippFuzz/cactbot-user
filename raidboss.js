@@ -1384,7 +1384,7 @@ Options.Triggers = [
     zoneRegex: /^Eden's Verse: Refulgence \(Savage\)$/,
     timeline: `
       161.0 "Threes Enter"
-      166.0 "Light Rampant Ends"
+      165.0 "Light Rampant Ends"
 
       495.0 "Stack South for Akh Rhai"
       
