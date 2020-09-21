@@ -1398,6 +1398,11 @@ Options.Triggers = [
       595.0 "Stack South for Akh Rhai"
       611.0 "Stack North for Akh Rhai"
       619.0 "Split Stack for Akh Morn"
+      
+      678.0 "Twos Enter"
+      684.0 "Clock Positions"
+      
+      692.0 "Move Boss North"
     `,
     timelineTriggers: [
       {
@@ -1468,6 +1473,27 @@ Options.Triggers = [
         regex: /Back to Mid/,
         alertText: {
           en: 'Back to Mid',
+        }
+      },
+      {
+        id: 'E8S Icelight Dragonsong Twos Enter',
+        regex: /Twos Enter/,
+        alertText: {
+          en: 'Twos Enter',
+        }
+      },
+      {
+        id: 'E8S Icelight Dragonsong Clock Positions',
+        regex: /Clock Positions/,
+        alertText: {
+          en: 'Clock Positions',
+        }
+      },
+      {
+        id: 'E8S Move Boss North',
+        regex: /Move Boss North/,
+        alertText: {
+          en: 'Move Boss North',
         }
       }
     ],
