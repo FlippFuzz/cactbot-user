@@ -1388,7 +1388,7 @@ Options.Triggers = [
 
       495.0 "Stack South for Akh Rhai"
       
-      545.0 "Move to intercardinal"
+      543.0 "Move to intercardinal"
       
       562.0 "Blue Knockback Mirror"
       567.0 "Green Knockback Mirror"
