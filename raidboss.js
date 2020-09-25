@@ -1403,6 +1403,8 @@ Options.Triggers = [
       684.0 "Clock Positions"
       
       692.0 "Move Boss North"
+      
+      734.0 "Stack closer to boss"
     `,
     timelineTriggers: [
       {
@@ -1494,6 +1496,13 @@ Options.Triggers = [
         regex: /Move Boss North/,
         alertText: {
           en: 'Move Boss North',
+        }
+      },
+      {
+        id: 'E8S Wyrm Lament 2 Stack closer to boss',
+        regex: /Stack closer to boss/,
+        alertText: {
+          en: 'Stack closer to boss',
         }
       }
     ],
