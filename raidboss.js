@@ -1405,6 +1405,10 @@ Options.Triggers = [
       692.0 "Move Boss North"
       
       734.0 "Stack closer to boss"
+	  
+	  760.0 "Split Stack for Akh Morn"
+	  
+	  780.0 "Split Stack for Akh Morn"
     `,
     timelineTriggers: [
       {
