@@ -251,6 +251,19 @@ Options.Triggers = [
           };
         },
       },
+      {
+        // Example Log:
+        // [22:53:41.135] 15:102D0725:Solyln Fay:8D2:Trick Attack:4000B1D9:Shiva:1E710203:6EE90000:5050E:27E0000:0:0:0:0:0:0:0:0:0:0:0:0:52259022:72360160:10000:10000:0:1000:99.99231:99.99231:0:3.095573:115384:115384:10000:10000:0:1000:102.6915:104.0818:-0.004453726:-2.428089:00006070
+        // [22:53:41.000] 00:102b:Solyln Fay uses Trick Attack.
+        id: 'General Trick Attack',
+        netRegex: NetRegexes.ability({ id: '8D2' }),
+        infoText: function(data, matches) {
+          let name = data.ShortName(matches.source);
+          return {
+            en: 'Trick Attack: ' + name,
+          };
+        },
+      },
     ]
   },
   {
