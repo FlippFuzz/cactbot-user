@@ -1766,6 +1766,91 @@ Options.Triggers = [
     triggers: [
     ]
   },
+  {
+    // Emerald Weapon EX
+    zoneId: ZoneId.CastrumMarinumExtreme,
+    timeline: `
+    `,
+    timelineTriggers: [
+	  {
+        id: 'EmeraldEx Tertius Aire Tam Storm',
+        regex: /Aire Tam Storm/,
+        beforeSeconds: 9,
+        alertText: {
+          en: 'Avoid Puddle',
+        }
+      }, 
+	  {
+        id: 'EmeraldEx Secundus Terminus Est',
+        regex: /Secundus Terminus Est/,
+        beforeSeconds: 13,
+        alertText: {
+          en: 'Hold Inner Release',
+        }
+      }
+    ],
+    triggers: [
+	  {
+        id: 'EmeraldEx Tertius Terminus est',
+        netRegex: NetRegexes.startsUsing({ source: 'The Emerald Weapon', id: '55CC', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55CC', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55CC', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55CC', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Swords',
+            de: 'Schwerter',
+            fr: 'Épées',
+            cn: '剑',
+            ko: '검',
+          }
+        },
+        run: function(data) {
+          data.EmeraldExInSwords = true;
+		  // console.log('EmeraldEx Tertius Terminus est: Setting data.EmeraldExInSwords = true');
+        }
+      },
+      {
+        id: 'EmeraldEx Swords + Sidescape', // This means that the boss has upper half left.
+        netRegex: NetRegexes.startsUsing({ source: 'The Emerald Weapon', id: '55D[4-5]', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55D[4-5]', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55D[4-5]', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55D[4-5]', capture: false }),
+		condition: function(data, matches, output) { 
+		  data.EmeraldExInSwords = data.EmeraldExInSwords || false;
+		  if (data.EmeraldExInSwords == true) {
+			// console.log('EmeraldEx Swords + Sidescape: condition true');
+			return true;
+          } else {
+		    // console.log('EmeraldEx Swords + Sidescape: condition false');
+			return false;
+		  }
+		},
+		durationSeconds: 21,
+        alarmText: {en: 'Side, KnockBack, Out then In'},
+      },
+      {
+        id: 'EmeraldEx Swords + Expire', // This means that the boss has only bottom half.
+        netRegex: NetRegexes.startsUsing({ source: 'The Emerald Weapon', id: '55D1', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55D1', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55D1', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55D1', capture: false }),
+		condition: function(data, matches, output) { 
+		  data.EmeraldExInSwords = data.EmeraldExInSwords || false;
+		  if (data.EmeraldExInSwords == true) {
+			// console.log('EmeraldEx Swords + Expire: condition true');
+			return true;
+          } else {
+			// console.log('EmeraldEx Swords + Expire: condition false');
+			return false;
+		  }
+		},
+		durationSeconds: 21,
+        alarmText: {en: 'Out, Puddle, In, then Out'},
+      },
+    ]
+  },
 ];
 
 // Per trigger options.  By default, each trigger uses the global options
