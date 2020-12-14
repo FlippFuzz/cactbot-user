@@ -1851,6 +1851,16 @@ Options.Triggers = [
       },
     ]
   },
+  {
+    // E9S
+    zoneId: ZoneId.EdensPromiseUmbraSavage,
+    timeline: `
+    `,
+    timelineTriggers: [
+    ],
+    triggers: [
+    ]
+  },
 ];
 
 // Per trigger options.  By default, each trigger uses the global options
