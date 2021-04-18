@@ -119,7 +119,9 @@ Options.DisabledTriggers = {
   'WOLEx Spectral Black Mage / White Mage': true,
   'WOLEx Summoner / Warrior': true,
   'WOLEx Spectral Bard / Dark Knight': true,
-  'WOLEx Spectral Ninja': true
+  'WOLEx Spectral Ninja': true,
+  'E9S Anti-Air Phaser Unlimited List': true,
+  'E9S Wide-Angle Phaser Unlimited List': true
 };
 
 
@@ -1418,10 +1420,10 @@ Options.Triggers = [
       692.0 "Move Boss North"
       
       734.0 "Stack closer to boss"
-	  
-	  760.0 "Split Stack for Akh Morn"
-	  
-	  780.0 "Split Stack for Akh Morn"
+      
+      760.0 "Split Stack for Akh Morn"
+      
+      780.0 "Split Stack for Akh Morn"
     `,
     timelineTriggers: [
       {
@@ -1772,7 +1774,7 @@ Options.Triggers = [
     timeline: `
     `,
     timelineTriggers: [
-	  {
+      {
         id: 'EmeraldEx Tertius Aire Tam Storm',
         regex: /Aire Tam Storm/,
         beforeSeconds: 9,
@@ -1780,17 +1782,17 @@ Options.Triggers = [
           en: 'Avoid Puddle',
         }
       }, 
-	  {
+      {
         id: 'EmeraldEx Secundus Terminus Est',
         regex: /Secundus Terminus Est/,
-        beforeSeconds: 13,
+        beforeSeconds: 12,
         alertText: {
           en: 'Hold Inner Release',
         }
       }
     ],
     triggers: [
-	  {
+      {
         id: 'EmeraldEx Tertius Terminus est',
         netRegex: NetRegexes.startsUsing({ source: 'The Emerald Weapon', id: '55CC', capture: false }),
         netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55CC', capture: false }),
@@ -1808,7 +1810,7 @@ Options.Triggers = [
         },
         run: function(data) {
           data.EmeraldExInSwords = true;
-		  // console.log('EmeraldEx Tertius Terminus est: Setting data.EmeraldExInSwords = true');
+          // console.log('EmeraldEx Tertius Terminus est: Setting data.EmeraldExInSwords = true');
         }
       },
       {
@@ -1817,17 +1819,17 @@ Options.Triggers = [
         netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55D[4-5]', capture: false }),
         netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55D[4-5]', capture: false }),
         netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55D[4-5]', capture: false }),
-		condition: function(data, matches, output) { 
-		  data.EmeraldExInSwords = data.EmeraldExInSwords || false;
-		  if (data.EmeraldExInSwords == true) {
-			// console.log('EmeraldEx Swords + Sidescape: condition true');
-			return true;
+        condition: function(data, matches, output) { 
+          data.EmeraldExInSwords = data.EmeraldExInSwords || false;
+          if (data.EmeraldExInSwords == true) {
+            // console.log('EmeraldEx Swords + Sidescape: condition true');
+            return true;
           } else {
-		    // console.log('EmeraldEx Swords + Sidescape: condition false');
-			return false;
-		  }
-		},
-		durationSeconds: 21,
+            // console.log('EmeraldEx Swords + Sidescape: condition false');
+            return false;
+          }
+        },
+        durationSeconds: 21,
         alarmText: {en: 'Side, KnockBack, Out then In'},
       },
       {
@@ -1836,17 +1838,17 @@ Options.Triggers = [
         netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55D1', capture: false }),
         netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55D1', capture: false }),
         netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55D1', capture: false }),
-		condition: function(data, matches, output) { 
-		  data.EmeraldExInSwords = data.EmeraldExInSwords || false;
-		  if (data.EmeraldExInSwords == true) {
-			// console.log('EmeraldEx Swords + Expire: condition true');
-			return true;
+        condition: function(data, matches, output) { 
+          data.EmeraldExInSwords = data.EmeraldExInSwords || false;
+          if (data.EmeraldExInSwords == true) {
+            // console.log('EmeraldEx Swords + Expire: condition true');
+            return true;
           } else {
-			// console.log('EmeraldEx Swords + Expire: condition false');
-			return false;
-		  }
-		},
-		durationSeconds: 21,
+            // console.log('EmeraldEx Swords + Expire: condition false');
+            return false;
+          }
+        },
+        durationSeconds: 21,
         alarmText: {en: 'Out, Puddle, In, then Out'},
       },
     ]
