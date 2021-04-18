@@ -1856,13 +1856,394 @@ Options.Triggers = [
   {
     // E9S
     zoneId: ZoneId.EdensPromiseUmbraSavage,
+    // Our markers are:
+    //    1
+    //  A   B
+    //4       2
+    //  D   C
+    //    3
+    timeline: `
+    `,
+    timelineTriggers: [
+      /*{
+        id: 'E9S Summon Adds',
+        regex: /Summon/,
+        durationSeconds: 15,
+        alertText: {
+          en: '0: Front\n1: Dodge the one that isn\'t being cleaved\n2: Back',
+        }
+      } */
+    ],
+    triggers: [
+      {
+        id: 'E9S Anti-Air Phaser Unlimited 2',
+        netRegex: NetRegexes.startsUsing({ id: '561[23]', source: 'Cloud Of Darkness', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ id: '561[23]', source: 'Wolke Der Dunkelheit', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ id: '561[23]', source: 'Nuage De Ténèbres', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ id: '561[23]', source: '暗闇の雲', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ id: '561[23]', source: '暗黑之云', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ id: '561[23]', source: '어둠의 구름', capture: false }),
+        durationSeconds: 15,
+        alertText: {en: 'Anti Air'}
+      },
+      {
+        id: 'E9S Wide-Angle Phaser Unlimited 2',
+        netRegex: NetRegexes.startsUsing({ id: '560[DE]', source: 'Cloud Of Darkness', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ id: '560[DE]', source: 'Wolke Der Dunkelheit', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ id: '560[DE]', source: 'Nuage De Ténèbres', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ id: '560[DE]', source: '暗闇の雲', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ id: '560[DE]', source: '暗黑之云', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ id: '560[DE]', source: '어둠의 구름', capture: false }),
+        durationSeconds: 15,
+        alertText: {en: 'Wide Angle'}
+      }
+    ]
+  },
+  {
+    // E10S
+    zoneId: ZoneId.EdensPromiseLitanySavage,
+    timeline: `
+        432.0 "Orbs with Knockback"
+        532.0 "Prepare for Pitch Bog 2"
+        623.0 "Orbs with Knockback"
+    `,
+    timelineTriggers: [
+      {
+        id: 'E10S Orbs with Knockback',
+        regex: /Orbs with Knockback/,
+        alertText: {
+          en: 'Orbs with Knockback',
+        }
+      },
+      {
+        id: 'E10S Prepare for Pitch Bog 2',
+        regex: /Prepare for Pitch Bog 2/,
+        alertText: {
+          en: 'Prepare for Pitch Bog 2',
+        }
+      }
+    ],
+    triggers: [
+      {
+        id: 'E10S Throne Of Shadow',
+        netRegex: NetRegexes.startsUsing({ source: 'Shadowkeeper', id: '5717', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Schattenkönig', id: '5717', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Roi De L\'Ombre', id: '5717', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: '影の王', id: '5717', capture: false }),
+        delaySeconds: 0,
+        response: Responses.getOut('alert'),
+      },
+      {
+        id: 'E10S Giga Slash Shadow Drop Right',
+        netRegex: NetRegexes.startsUsing({ source: 'Shadowkeeper', id: '5B2D', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Schattenkönig', id: '5B2D', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Roi De L\'Ombre', id: '5B2D', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: '影の王', id: '5B2D', capture: false }),
+        durationSeconds: (data) => data.gigaSlashCleaveDebuffDuration,
+        alertText: (data, _, output) => {
+          let ret = '';
+          switch (data.gigaSlashCleaveDebuffId) {
+          case '973':
+            ret = 'Left';
+            break;
+          case '974':
+            ret = 'Right';
+            break;
+          case '975':
+            ret = 'North';
+            break;
+          case '976':
+            ret = 'South';
+            break;
+          }
+      
+          delete data.gigaSlashCleaveDebuffId;
+          delete data.gigaSlashCleaveDebuffDuration;
+          if (!ret)
+            return;
+      
+          return output.leftCleave() + ", " + output.dropShadow({ dir: ret });
+        },
+        infoText: (data, _, output) => output.leftCleave(),
+        outputStrings: {
+          dropShadow: {
+            en: 'Drop Shadow ${dir}',
+            de: 'Schatten im ${dir} ablegen',
+            fr: 'Déposez l\'ombre du côté ${dir}',
+            ja: '${dir}へ、影を捨てる',
+            cn: '${dir}放影子',
+            ko: '${dir}에 그림자 놓기',
+          },
+          leftCleave: {
+            en: 'Left Cleave',
+            de: 'Linker Cleave',
+            fr: 'Cleave gauche',
+            ja: '左半面へ攻撃',
+            cn: '左侧顺劈',
+            ko: '왼쪽 공격',
+          },
+        },
+      },
+      {
+        id: 'E10S Giga Slash Shadow Drop Left',
+        netRegex: NetRegexes.startsUsing({ source: 'Shadowkeeper', id: '5B2C', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Schattenkönig', id: '5B2C', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Roi De L\'Ombre', id: '5B2C', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: '影の王', id: '5B2C', capture: false }),
+        durationSeconds: (data) => data.gigaSlashCleaveDebuffDuration,
+        alertText: (data, _, output) => {
+          let ret = '';
+          switch (data.gigaSlashCleaveDebuffId) {
+          case '973':
+            ret = 'Right';
+            break;
+          case '974':
+            ret = 'Left';
+            break;
+          case '975':
+            ret = 'South';
+            break;
+          case '976':
+            ret = 'North';
+            break;
+          }
+       
+          delete data.gigaSlashCleaveDebuffId;
+          delete data.gigaSlashCleaveDebuffDuration;
+          if (!ret)
+            return;
+       
+          return output.rightCleave() + ", " + output.dropShadow({ dir: ret });
+        },
+        infoText: (data, _, output) => output.rightCleave(),
+        outputStrings: {
+          dropShadow: {
+            en: 'Drop Shadow ${dir}',
+            de: 'Schatten im ${dir} ablegen',
+            fr: 'Déposez l\'ombre du côté ${dir}',
+            ja: '${dir}へ、影を捨てる',
+            cn: '${dir}放影子',
+            ko: '${dir}에 그림자 놓기',
+          },
+          rightCleave: {
+            en: 'Right Cleave',
+            de: 'Rechter Cleave',
+            fr: 'Cleave droit',
+            ja: '右半面へ攻撃',
+            cn: '右侧顺劈',
+            ko: '오른쪽 공격',
+          },
+        },
+      },
+    ]
+  },
+  {
+    // E11S
+    zoneId: ZoneId.EdensPromiseAnamorphosisSavage,
     timeline: `
     `,
     timelineTriggers: [
     ],
     triggers: [
+      {
+        id: 'E11S Sundered Sky',
+        netRegex: NetRegexes.startsUsing({ source: 'Shadowkeeper', id: '5717', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Schattenkönig', id: '5717', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Roi De L\'Ombre', id: '5717', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: '影の王', id: '5717', capture: false }),
+        delaySeconds: 0,
+        response: Responses.getOut('alert'),
+      },
+      {
+        id: 'E11S Cycle of Faith Fire',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '568A', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Fusioniert(?:e|er|es|en) Ascian', id: '568A', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Sabreur De Destins', id: '568A', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'フェイトブレイカー', id: '568A', capture: false }),
+        durationSeconds: 12,
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Fire\nClock -> Cross Pairs ->\nWait Knockback -> Stack at back'
+          },
+        },
+      },
+      {
+        id: 'E11S Cycle of Faith Lightning',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '5692', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Fusioniert(?:e|er|es|en) Ascian', id: '5692', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Sabreur De Destins', id: '5692', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'フェイトブレイカー', id: '5692', capture: false }),
+        durationSeconds: 12,
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Lightning\nClock -> Spread ->\nSides Out -> Lightning'
+          },
+        },
+      },
+      {
+        id: 'E11S Cycle of Faith Holy',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '569A', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Fusioniert(?:e|er|es|en) Ascian', id: '569A', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Sabreur De Destins', id: '569A', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'フェイトブレイカー', id: '569A', capture: false }),
+        durationSeconds: 12,
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Holy\nClock -> Holy Groups ->\nSides -> Rotate'
+          },
+        },
+      },
     ]
   },
+  {
+    // Diamond Weapon EX
+    zoneId: ZoneId.TheCloudDeckExtreme,
+    timeline: `
+        433.5 "Return to Original Platform"
+        517.0 "Shrapnel Next"
+    `,
+    timelineTriggers: [
+      {
+        id: 'DiamondEx Return to Original Platform',
+        regex: /Return to Original Platform/,
+        alertText: {
+          en: 'Return to Original Platform',
+        }
+      },
+      {
+        id: 'DiamondEx Shrapnel Next',
+        regex: /Shrapnel Next/,
+        alertText: {
+          en: 'Shrapnel Next',
+        }
+      },
+    ],
+    triggers: [
+      {
+        id: 'DiamondEx P2 North/South Jump',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5FB5', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5FB5', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5FB5', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5FB5', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'One Near, Two Away',
+            de: 'Hin oder weg ausweichen',
+            fr: 'Rapprochez-vous/Éloignez-vous',
+          },
+        },
+      },
+      {
+        id: 'DiamondEx P2 Zig-Zag Jump',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5FB2', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5FB2', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5FB2', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5FB2', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Dodge Side',
+            de: 'Orb vom Osten/Westen ausweichen',
+            fr: 'Esquivez Est/Ouest',
+          },
+        },
+      },
+      {
+        id: 'DiamondEx Adamant Purge West Diamond Rain',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5F9B', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5F9B', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5F9B', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5F9B', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'go Red -> Diamond Rain Next',
+            de: 'Geh nach Osten -> AoE',
+            fr: 'Allez à l\'est -> AoE',
+          },
+        },
+      },
+      {
+        id: 'DiamondEx Adamant Purge East Diamond Rain',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5F9A', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5F9A', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5F9A', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5F9A', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'go Blue -> Diamond Rain Next',
+            de: 'Geh nach Westen -> AoE',
+            fr: 'Allez à l\'ouest -> AoE',
+          },
+        },
+      },
+      {
+        id: 'DiamondEx Adamant Purge West Diamond Flash',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5FA5', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5FA5', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5FA5', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5FA5', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'go Red -> stack',
+            de: 'Geh nach Osten -> Sammeln',
+            fr: 'Allez à l\'est -> Packez-vous',
+          },
+        },
+      },
+      {
+        id: 'DiamondEx Adamant Purge East Diamond Flash',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5FA4', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5FA4', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5FA4', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5FA4', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'go Blue -> stack',
+            de: 'Geh nach Westen -> Sammeln',
+            fr: 'Allez à l\'ouest -> Packez-vous',
+          },
+        },
+      },
+      {
+        id: 'DiamondEx Adamant Purge West Homing Laser',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5FA3', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5FA3', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5FA3', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5FA3', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'go Red -> spread',
+            de: 'Geh nach Osten -> Verteilen',
+            fr: 'Allez à l\'est -> Dispersez-vous',
+          },
+        },
+      },
+      {
+        id: 'DiamondEx Adamant Purge East Homing Laser',
+        netRegex: NetRegexes.startsUsing({ source: 'The Diamond Weapon', id: '5FA2', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Diamant-Waffe', id: '5FA2', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Arme Diamant', id: '5FA2', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ダイヤウェポン', id: '5FA2', capture: false }),
+        infoText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'go Blue -> spread',
+            de: 'Geh nach Westen -> Verteilen',
+            fr: 'Allez à l\'ouest -> Dispersez-vous',
+          },
+        },
+      },
+    ]
+  }
 ];
 
 // Per trigger options.  By default, each trigger uses the global options
