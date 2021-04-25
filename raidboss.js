@@ -2046,6 +2046,63 @@ Options.Triggers = [
     ],
     triggers: [
       {
+        id: 'E11S Elemental Break Fire',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '5663', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Fusioniert(?:e|er|es|en) Ascian', id: '5663', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Sabreur De Destins', id: '5663', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'フェイトブレイカー', id: '5663', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '绝命战士', id: '5663', capture: false }),
+        alertText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Clock -> Pairs',
+            de: 'Himmelsrichtung -> Auf Partner sammeln',
+            fr: 'Position -> Packez-vous avec votre partenaire',
+            ja: '8方向散開 -> ペア頭割り',
+            cn: '八方 -> 分摊',
+            ko: '8산개 -> 파트너 쉐어뎀',
+          },
+        },
+      },
+      {
+        id: 'E11S Elemental Break Lightning',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '5666', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Fusioniert(?:e|er|es|en) Ascian', id: '5666', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Sabreur De Destins', id: '5666', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'フェイトブレイカー', id: '5666', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '绝命战士', id: '5666', capture: false }),
+        alertText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Clock -> Spread',
+            de: 'Himmelsrichtung -> Verteilen',
+            fr: 'Position -> Dispersez-vous',
+            ja: '8方向散開 -> 散開',
+            cn: '八方 -> 分散',
+            ko: '8산개 -> 산개',
+          },
+        },
+      },
+      {
+        id: 'E11S Elemental Break Holy',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '5668', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Fusioniert(?:e|er|es|en) Ascian', id: '5668', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Sabreur De Destins', id: '5668', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'フェイトブレイカー', id: '5668', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '绝命战士', id: '5668', capture: false }),
+        alertText: (data, _, output) => output.text(),
+        outputStrings: {
+          text: {
+            en: 'Clock -> Holy Groups',
+            de: 'Himmelsrichtung -> Sanctus Gruppen',
+            fr: 'Position -> Groupes',
+            ja: '8方向散開 -> 光3方向頭割り',
+            cn: '八方 -> 光三向分摊',
+            ko: '8산개 -> 홀리 그룹 쉐어',
+          },
+        },
+      },
+      {
         id: 'E11S Sundered Sky',
         netRegex: NetRegexes.startsUsing({ source: 'Shadowkeeper', id: '5717', capture: false }),
         netRegexDe: NetRegexes.startsUsing({ source: 'Schattenkönig', id: '5717', capture: false }),
