@@ -2327,6 +2327,7 @@ Options.Triggers = [
         netRegexJa: NetRegexes.startsUsing({ source: 'プロミス・オブ・エデン', id: '58A5', capture: false }),
         netRegexCn: NetRegexes.startsUsing({ source: '伊甸之约', id: '58A5', capture: false }),
         netRegexKo: NetRegexes.startsUsing({ source: '에덴의 약속', id: '58A5', capture: false }),
+        suppressSeconds: 2,
         run: (data) => {
           delete data.weightTargets;
 
