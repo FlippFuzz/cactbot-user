@@ -2329,10 +2329,13 @@ Options.Triggers = [
         netRegexKo: NetRegexes.startsUsing({ source: '에덴의 약속', id: '58A5', capture: false }),
         suppressSeconds: 2,
         run: (data) => {
+          console.log("E12S Promise Weight Cleanup triggered.");
+          
           delete data.weightTargets;
 
           if(data.seenFirstBombs) {
               data.seenSecondBombs = true;
+              console.log("E12S Promise Weight Cleanup. Setting seenSecondBombs = true");
           }
 
           data.seenFirstBombs = true;
