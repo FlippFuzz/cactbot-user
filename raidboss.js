@@ -358,8 +358,8 @@ Options.Triggers = [
       infotext "Phase 3: Single Flare, Puddle and Prey"
       infotext "Phase 4: Equilibrium and Clock"
       infotext "Phase 5: Double Flares"
-      
-      infotext "Spread for Flares" 
+
+      infotext "Spread for Flares"
       infotext "Stack"
       infotext "Flares + Eyes"
       infotext "Equilibrium"
@@ -408,7 +408,7 @@ Options.Triggers = [
     timeline: `
       hideall "Hidden - Disable Left Right Mode"
       hideall "Hidden - Enable Left Right Mode"
-      
+
       2.0 "Hidden - Disable Left Right Mode"
       14.0 "Hidden - Disable Left Right Mode"
       25.0 "Hidden - Disable Left Right Mode"
@@ -416,11 +416,11 @@ Options.Triggers = [
       133.0 "Hidden - Enable Left Right Mode"
       142.0 "Hidden - Enable Left Right Mode"
       147.0 "Hidden - Enable Left Right Mode"
-      
+
       188.0 "Hidden - Disable Left Right Mode"
       198.0 "Hidden - Disable Left Right Mode"
       212.0 "Hidden - Disable Left Right Mode"
-      
+
       317.0 "Buster Soon!"
 
       537.0 "Hidden - Enable Left Right Mode"
@@ -465,7 +465,7 @@ Options.Triggers = [
         run: function(data) {
           data.refreshed = true;
           // "E3S Hidden - Disable Left Right Mode" doesn't seem to work. Use refreshing shower as another way to hopefully activate it
-          data.temporaryCurrentLeftRightMode = false; 
+          data.temporaryCurrentLeftRightMode = false;
         },
       },
       {
@@ -473,7 +473,7 @@ Options.Triggers = [
         regex: / 00:282B:Leviathan begins casting Black Smokers/,
         run: function(data) {
           // Just to really make sure "E3S Hidden - Enable Left Right Mode" activates
-          data.temporaryCurrentLeftRightMode = true; 
+          data.temporaryCurrentLeftRightMode = true;
         },
       },
       {
@@ -620,7 +620,7 @@ Options.Triggers = [
               data.evilEarth == false
               return {
                 en: 'MOVE!',
-              };              
+              };
             }
           }
         },
@@ -687,7 +687,7 @@ Options.Triggers = [
         alertText: function(data, matches) {
           let x = matches.x;
           let y = matches.y;
-     
+
           if (data.phase == 'armor') {
             // Three line bombs (middle, e/w, w/e), with seismic wave.
             if (x < 95) {
@@ -716,7 +716,7 @@ Options.Triggers = [
             // Ignore middle point, which may come first.
             if (xMiddle && yMiddle)
               return;
-     
+
             data.printedBury = true;
             if (!xMiddle && !yMiddle) {
               // Corners dropped first.  Cardinals safe.
@@ -846,39 +846,39 @@ Options.Triggers = [
       1.0  "NEXT: Rods->Add->Buster"
       37.0 "Off Tank 3 Orbs"
       39.0 "Everyone 1 Orb"
-      
+
       74.0 "NEXT: Stormclouds->Knockback->Buster"
       75.0 "Tanks and DPS 1 Orb"
-      
+
       147.0 "NEXT: Buffed Aoe->Add->Buster->Stepped Leader"
       149.0 "Everyone 1 Orb"
-      
+
       180.0 "Off Tank 3 Orbs"
       200.0 "Prepare for Stepped Leader"
-      
+
       229.0 "Fury's 14"
       231.0 "Everyone 1 Orb"
-      
+
       275.0 "NEXT: Donut Stepped Leader->Chain Lightning->Buster"
       280.0 "Stack for Donut Stepped Leader"
-      
+
       318.0 "NEXT: Add, Buffed Aoe, Stepped Leader, Buster"
       319.0 "Off Tank 3 Orbs"
       360.0 "Prepare for Stepped Leader"
-      
+
       338.0 "Everyone 1 Orb"
-      
+
       385.0 "NEXT: Fury's 14 with charge!"
       389.0 "Everyone 1 Orb"
-      
+
       430.0 "NEXT: Stormclouds->Knockback->Chain Lightning->Buster"
       435.0 "Tanks and DPS 1 Orb"
-      
+
 #     480.0 "Everyone 1 Orb"
-      
+
       530.0 "NEXT: Stepped Leader->Buffed AoE -> Buffed AoE"
       532.0 "Prepare for Stepped Leader"
-      
+
       547.0 "Everyone 1 Orb"
       576.0 "Everyone 1 Orb"
     `,
@@ -915,7 +915,7 @@ Options.Triggers = [
         id: 'E5S Stack for Donut Stepped Leader',
         regex: /Stack for Donut Stepped Leader/,
         alertText: {
-          en: 'Stack for Donut Stepped Leader', 
+          en: 'Stack for Donut Stepped Leader',
         }
       }
     ],
@@ -936,7 +936,7 @@ Options.Triggers = [
         response: Responses.spread('alarm'),
       }
     ]
-  }, 
+  },
   {
     // E6S
     zoneRegex: /^Eden's Verse: Furor \(Savage\)$/,
@@ -1038,41 +1038,41 @@ Options.Triggers = [
         regexJa: Regexes.startsUsing({ source: ['イフリート', 'ラクタパクシャ'], id: '4BD3', capture: false }),
         promise: function(data) {
           let p = new Promise(async (res) => {
-              
+
             // console.log("E6S Strike Spark v2: Promise triggered");
-              
+
             // helper function to delay the promise execution for the given time
             const sleep = (m) => new Promise((r) => setTimeout(r, m));
-      
+
             await sleep(10000);
-      
+
             let combatantNames = null;
-      
+
             const ifritLocaleNames = {
               en: 'Ifrit',
               de: 'Ifrit',
               fr: 'Ifrit',
               ja: 'イフリート',
             };
-      
+
             const raktapaksaLocaleNames = {
               en: 'Raktapaksa',
               de: 'Raktapaksa',
               fr: 'Raktapaksa',
               ja: 'ラクタパクシャ',
             };
-      
+
             // select the 4 most recent Ifrit or Raktapaksa's depending on phase
             if (data.phase === 'ifrit')
               combatantNames = [ifritLocaleNames[data.lang]];
             else
               combatantNames = [raktapaksaLocaleNames[data.lang]];
-      
+
             let combatantData = await window.callOverlayHandler({
               call: 'getCombatants',
               names: combatantNames,
             });
-              
+
             // if we could not retrieve combatant data, the
             // trigger will not work, so just resume promise here.
             if (!(combatantData !== null &&
@@ -1082,14 +1082,14 @@ Options.Triggers = [
               data.safeZone = null;
               res();
             }
-            
+
             // console.log("Obtained combatantData!");
-      
+
             // we need to filter for the Ifrit with the highest ID
             // since that one is always the safe spot.
             let sortedCombatants = combatantData.combatants.sort((a, b) => a.ID - b.ID);
             let currentHighestCombatant = sortedCombatants.pop();
-      
+
             // all variation ranges for all the 9 ball positions for the kicking actors
             // north      x: 96-104   y: 85-93
             // northeast  x: 107-115  y: 85-93
@@ -1101,7 +1101,7 @@ Options.Triggers = [
             // southwest  x: 85-93    y: 107-115
             let safeZoneObj1 = { en: '', de: '' };
             let safeZoneObj2 = { en: '', de: '' };
-           
+
             // don't need to go through all the posibilities,
             // only those 4 ifs do reflect the above positions
             if (currentHighestCombatant.PosY > 84 && currentHighestCombatant.PosY < 94) {
@@ -1115,7 +1115,7 @@ Options.Triggers = [
                 de: 'süd',
               };
             }
-           
+
             if (currentHighestCombatant.PosX > 84 && currentHighestCombatant.PosX < 94) {
               safeZoneObj2 = {
                 en: 'west',
@@ -1127,7 +1127,7 @@ Options.Triggers = [
                 de: 'ost',
               };
             }
-           
+
             data.safeZone = {
               en: safeZoneObj1.en + safeZoneObj2.en,
               de: safeZoneObj1.de + safeZoneObj2.de,
@@ -1142,7 +1142,7 @@ Options.Triggers = [
             // console.log("currentHighestCombatant.PosX: " + currentHighestCombatant.PosX);
             // console.log("currentHighestCombatant.PosY: " + currentHighestCombatant.PosY);
             // console.log("safeZone: " + data.safeZone.en);
-            
+
             switch(data.safeZone.en) {
               case "north":
                 data.safeZone.en = "Alpha";
@@ -1152,29 +1152,29 @@ Options.Triggers = [
                 break;
               case "east":
                 data.safeZone.en = "Bravo";
-                break;  
+                break;
               case "southeast":
                 data.safeZone.en = "Four";
-                break;  
+                break;
               case "south":
                 data.safeZone.en = "Charlie";
-                break;  
+                break;
               case "southwest":
                 data.safeZone.en = "Three";
-                break;  
+                break;
               case "west":
                 data.safeZone.en = "Delta";
-                break;  
+                break;
               case "northwest":
                 data.safeZone.en = "One";
-                break;  
+                break;
             }
-            
+
             // console.log("Modified safeZone: " + data.safeZone.en);
-            
+
             res();
           });
-      
+
           return p;
         },
         infoText: function(data) {
@@ -1197,7 +1197,7 @@ Options.Triggers = [
             });
 
             console.log(JSON.stringify(combatantData, null, 2));
-            
+
             res();
           });
 
@@ -1238,7 +1238,7 @@ Options.Triggers = [
         run: function(data) {
           // Data is reset every pull. Initialize it if it does not exist.
           data.wordsOfMotionState = data.wordsOfMotionState || "Start";
-          
+
           let previousState = data.wordsOfMotionState;
           switch(data.wordsOfMotionState) {
             case "Start":
@@ -1254,7 +1254,7 @@ Options.Triggers = [
               break;
           }
           console.log("E7S Words of Motion State Tracker: previousState: " + previousState + ", newState: " + data.wordsOfMotionState);
-        }    
+        }
       },
       {
         id: 'E7S Light or Dark Course',
@@ -1270,13 +1270,13 @@ Options.Triggers = [
             let currentTime = (new Date('1970-01-01T' + result[1] + 'Z')).getTime();
             let x = parseFloat(result[2]);
             let y = parseFloat(result[3]);
-            
+
             //console.log("x: " + x + ", y: " + y + ", currentTime: " + currentTime + ", prevTime: " + data.phase1PortalsPrevTime);
-                        
+
             // We will move to the next State if time greater than previous state by 1 second.
             if(currentTime > data.phase1PortalsPrevTime + 1000) {
               data.phase1PortalsCalloutDone = false; // Reset this. We only want to callout once for each state.
-              
+
               let previousState = data.phase1PortalsState;
               data.phase1PortalsPrevTime = currentTime;
               switch(data.phase1PortalsState) {
@@ -1310,9 +1310,9 @@ Options.Triggers = [
               }
               console.log("STATE CHANGE. NEW: " + data.phase1PortalsState + " OLD: " + previousState);
             }
-            
+
             console.log(((new Date(currentTime)).toISOString().split("T"))[1] + " Light/Dark Course. x: " + x + ", y: " + y + ", State: " + data.phase1PortalsState);
-            
+
             // Perform logic based on current state
             switch(data.phase1PortalsState) {
               case "After Front to Back 1":
@@ -1322,7 +1322,7 @@ Options.Triggers = [
                   data.phase1PortalsSafeSpot = "Back";
                   data.phase1PortalsCallout = "Go to Blue First";
                   console.log("phase1PortalsSafeSpot: " + data.phase1PortalsSafeSpot);
-                  
+
                   if(data.phase1PortalsCalloutDone == false) { // Only alertText once in each state.
                       data.phase1PortalsCalloutDone = true;
                       return true; // Perform alertText.
@@ -1330,24 +1330,24 @@ Options.Triggers = [
                       return false;
                   }
                 }
-                
+
                 if(Math.abs(x - 105) < 1) {
                   // Blue will fire first.
                   data.phase1PortalsSafeSpot = "Front";
                   data.phase1PortalsCallout = "Go to Red First";
                   console.log("phase1PortalsSafeSpot: " + data.phase1PortalsSafeSpot);
-                  
+
                   if(data.phase1PortalsCalloutDone == false) { // Only alertText once in each state.
                     data.phase1PortalsCalloutDone = true;
                     return true; // Perform alertText.
                   } else {
                     return false;
-                  }                
-                }           
+                  }
+                }
                 break;
-                
+
               case "After Front to Back 2":
-                // Nothing to do                
+                // Nothing to do
                 // Can alertText safe spot again.
                 if(data.phase1PortalsCalloutDone == false) { // Only alertText once in each state.
                   data.phase1PortalsCallout = data.phase1PortalsSafeSpot;
@@ -1355,19 +1355,19 @@ Options.Triggers = [
                   return true; // Perform alertText.
                 } else {
                   return false;
-                }                
+                }
                 break;
-                
+
               case "zAfter First Set Right to Left 1":
               case "zAfter Second Set Right to Left 1":
               case "zAfter Third Set Right to Left 1":
                 // alertText + update next position. Only do this ONCE in this state.
                 if(data.phase1PortalsCalloutDone == false) {
-                  if(Math.abs(y - 85) < 1) { 
+                  if(Math.abs(y - 85) < 1) {
                     data.phase1PortalsCallout = "Back";
                     data.phase1PortalsCalloutDone = true;
                     return true;
-                  } else if (Math.abs(y - 95) < 1) { 
+                  } else if (Math.abs(y - 95) < 1) {
                     data.phase1PortalsSafeSpot = "Front";
                     data.phase1PortalsCalloutDone = true;
                     return true;
@@ -1402,27 +1402,27 @@ Options.Triggers = [
       165.0 "Light Rampant Ends"
 
       495.0 "Stack South for Akh Rhai"
-      
+
       543.0 "Move to intercardinal"
-      
+
       562.0 "Blue Knockback Mirror"
       567.0 "Green Knockback Mirror"
       572.0 "Red Knockback Mirror"
-      
+
       590.0 "Back to Mid"
       595.0 "Stack South for Akh Rhai"
       611.0 "Stack North for Akh Rhai"
       619.0 "Split Stack for Akh Morn"
-      
+
       678.0 "Twos Enter"
       684.0 "Clock Positions"
-      
+
       692.0 "Move Boss North"
-      
+
       734.0 "Stack closer to boss"
-      
+
       760.0 "Split Stack for Akh Morn"
-      
+
       780.0 "Split Stack for Akh Morn"
     `,
     timelineTriggers: [
@@ -1589,7 +1589,7 @@ Options.Triggers = [
         alertText: function(data, matches) {
             data.e8sMirrorMirror3Colour = "Red";
             return "" + data.e8sMirrorMirror3Colour;
-        }       
+        }
       },
       {
         id: 'E8S Hallowed Wings Left v2',
@@ -1602,7 +1602,7 @@ Options.Triggers = [
         durationSeconds: 9,
         alertText: function(data, matches) {
             var result = "Right";
-            // Check whether this is the first hallowed wings 
+            // Check whether this is the first hallowed wings
             // First hallowed wings means this is mirror mirror 3.
             data.e8sFirstHallowedWings = data.e8sFirstHallowedWings || "yes"; // Probably more efficient if this is boolean
             if(data.e8sFirstHallowedWings == "yes") {
@@ -1630,7 +1630,7 @@ Options.Triggers = [
         durationSeconds: 9,
         alertText: function(data, matches) {
             var result = "Left";
-            // Check whether this is the first hallowed wings 
+            // Check whether this is the first hallowed wings
             // First hallowed wings means this is mirror mirror 3.
             data.e8sFirstHallowedWings = data.e8sFirstHallowedWings || "yes"; // Probably more efficient if this is boolean
             if(data.e8sFirstHallowedWings == "yes") {
@@ -1781,7 +1781,7 @@ Options.Triggers = [
         alertText: {
           en: 'Avoid Puddle',
         }
-      }, 
+      },
       {
         id: 'EmeraldEx Secundus Terminus Est',
         regex: /Secundus Terminus Est/,
@@ -1819,7 +1819,7 @@ Options.Triggers = [
         netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55D[4-5]', capture: false }),
         netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55D[4-5]', capture: false }),
         netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55D[4-5]', capture: false }),
-        condition: function(data, matches, output) { 
+        condition: function(data, matches, output) {
           data.EmeraldExInSwords = data.EmeraldExInSwords || false;
           if (data.EmeraldExInSwords == true) {
             // console.log('EmeraldEx Swords + Sidescape: condition true');
@@ -1838,7 +1838,7 @@ Options.Triggers = [
         netRegexDe: NetRegexes.startsUsing({ source: 'Smaragd-Waffe', id: '55D1', capture: false }),
         netRegexFr: NetRegexes.startsUsing({ source: 'Arme Émeraude', id: '55D1', capture: false }),
         netRegexJa: NetRegexes.startsUsing({ source: 'エメラルドウェポン', id: '55D1', capture: false }),
-        condition: function(data, matches, output) { 
+        condition: function(data, matches, output) {
           data.EmeraldExInSwords = data.EmeraldExInSwords || false;
           if (data.EmeraldExInSwords == true) {
             // console.log('EmeraldEx Swords + Expire: condition true');
@@ -1956,12 +1956,12 @@ Options.Triggers = [
             ret = 'South';
             break;
           }
-      
+
           delete data.gigaSlashCleaveDebuffId;
           delete data.gigaSlashCleaveDebuffDuration;
           if (!ret)
             return;
-      
+
           return output.leftCleave() + ", " + output.dropShadow({ dir: ret });
         },
         infoText: (data, _, output) => output.leftCleave(),
@@ -2007,12 +2007,12 @@ Options.Triggers = [
             ret = 'North';
             break;
           }
-       
+
           delete data.gigaSlashCleaveDebuffId;
           delete data.gigaSlashCleaveDebuffDuration;
           if (!ret)
             return;
-       
+
           return output.rightCleave() + ", " + output.dropShadow({ dir: ret });
         },
         infoText: (data, _, output) => output.rightCleave(),
@@ -2103,13 +2103,22 @@ Options.Triggers = [
         },
       },
       {
-        id: 'E11S Sundered Sky',
-        netRegex: NetRegexes.startsUsing({ source: 'Shadowkeeper', id: '5717', capture: false }),
-        netRegexDe: NetRegexes.startsUsing({ source: 'Schattenkönig', id: '5717', capture: false }),
-        netRegexFr: NetRegexes.startsUsing({ source: 'Roi De L\'Ombre', id: '5717', capture: false }),
-        netRegexJa: NetRegexes.startsUsing({ source: '影の王', id: '5717', capture: false }),
-        delaySeconds: 0,
-        response: Responses.getOut('alert'),
+        id: 'E11S Sundered Sky Start Move 1',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '567[7-8]', capture: false }),
+        delaySeconds: 28,
+        run: (data) => {
+          console.log("E11S Sundered Sky Start Move 1");
+        },
+        alarmText: {en: 'Move'},
+      },
+      {
+        id: 'E11S Sundered Sky Start Move 2',
+        netRegex: NetRegexes.startsUsing({ source: 'Fatebreaker', id: '567[7-8]', capture: false }),
+        delaySeconds: 33,
+        run: (data) => {
+          console.log("E11S Sundered Sky Start Move 2");
+        },
+        alarmText: {en: 'Move + Arms Length'},
       },
       {
         id: 'E11S Cycle of Faith Fire',
@@ -2298,6 +2307,153 @@ Options.Triggers = [
             fr: 'Allez à l\'ouest -> Dispersez-vous',
           },
         },
+      },
+    ]
+  },
+  {
+    // E12S
+    zoneId: ZoneId.EdensPromiseEternitySavage,
+    timeline: `
+    `,
+    timelineTriggers: [
+    ],
+    triggers: [
+      {
+        id: 'E12S Promise Weight Cleanup',
+        // Overwriting this trigger to also figure out the 3rd set of titan bombs
+        netRegex: NetRegexes.startsUsing({ source: 'Eden\'s Promise', id: '58A5', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Edens Verheißung', id: '58A5', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Promesse D\'Éden', id: '58A5', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'プロミス・オブ・エデン', id: '58A5', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '伊甸之约', id: '58A5', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '에덴의 약속', id: '58A5', capture: false }),
+        run: (data) => {
+          delete data.weightTargets;
+
+          if(data.seenFirstBombs) {
+              data.seenSecondBombs = true;
+          }
+
+          data.seenFirstBombs = true;
+        },
+      },
+      {
+        id: 'E12S Promise Junction Titan Bombs',
+        netRegex: NetRegexes.headMarker({}),
+        condition: (data) => data.isDoorBoss,
+        response: (data, matches, output) => {
+          // Figure out headmarker Id
+          const firstHeadmarker = parseInt('00DA', 16);
+          
+          if (typeof data.decOffset === 'undefined')
+            data.decOffset = parseInt(matches.id, 16) - firstHeadmarker;
+         
+          const id = (parseInt(matches.id, 16) - data.decOffset).toString(16).toUpperCase().padStart(4, '0');
+
+          // Good timings. 8:18, 9:19, before 9:48, 10:05 https://www.youtube.com/watch?v=xoRH_7wqHl8&ab_channel=EavanWells
+          // Blue - 00BB
+          // Yellow - 00B9
+          // Orange - 00BA
+
+          // Handle pairs for blue for 2nd set
+          if (id === '00BB') {
+            data.weightTargets = data.weightTargets || [];
+            data.weightTargets.push(matches.target);
+
+            // Handle double blue titan on 2nd iterations.
+            if (data.seenFirstBombs && !data.seenSecondBombs && data.weightTargets.length === 2) {
+              if (data.weightTargets.includes(data.me)) {
+                const partner = data.weightTargets[data.weightTargets[0] === data.me ? 1 : 0];
+                return {
+                  alarmText: 'D or B with ' + partner,
+                };
+              }
+            }
+          }
+
+          // No callouts if the headmarker is not on the player
+          console.log("matches.target: " + matches.target);
+          console.log("data.role: " + data.role);
+          console.log("data.me: " + data.me);
+          if (matches.target !== data.me)
+            return;
+                
+          let role = data.role;
+
+          // 1st Set of bombs
+          if(!data.seenFirstBombs) {
+            console.log("Junction Titan Bombs - 1st Set");
+
+            if (role === 'tank') {
+              if (id === '00B9') { // Yellow
+                console.log("  Tank. Yellow. A");
+                return {alarmText: 'Yellow. A'};
+              } else if (id === '00BA') { // Orange
+                console.log("  Tank. Orange. 4");
+                return {alarmText: 'Orange. 4'};
+              } else if (id === '00BB') { // Blue - How did you get this? South.
+                console.log("  Tank. Blue. C");
+                return {alarmText: 'Blue. C'};
+              }
+            }
+            else if (role === 'healer') {
+              if (id === '00B9') { // Yellow
+                console.log("  Healer. Yellow. D");
+                return {alarmText: 'Yellow. D'};
+              } else if (id === '00BA') { // Orange
+                console.log("  Healer. Orange. 4");
+                return {alarmText: 'Orange. 4'};
+              } else if (id === '00BB') { // Blue - How did you get this? South.
+                console.log("  Healer. Blue. C");
+                return {alarmText: 'Blue. C'};
+              }
+            }
+            else { // dps
+              console.log("  Warning: not implemented");
+            }
+          }
+          // 2nd set of bombs
+          else if (!data.seenSecondBombs) {
+            console.log("Junction Titan Bombs - 2nd Set");
+
+            // Tank/headers are the same
+            if (role === 'tank' || role === 'healer') {
+              if (id === '00BA') { // Orange
+                console.log("  Tank/Healer. Orange. A");
+                return {alarmText: 'Orange. A'};
+              }
+            }
+            // DPS
+            else {
+              if (id === '00BA') { // Orange
+                console.log("  DPS. Orange. C");
+                return {alarmText: 'Orange. C'};
+              }
+            }
+          }
+          // 3rd set of bombs
+          else {
+            console.log("Junction Titan Bombs - 3rd Set");
+
+            // Tank/headers are the same
+            if (role === 'tank' || role === 'healer') {
+              if (id === '00B9') { // Yellow
+                console.log("  Tank/Healer. Yellow. 4");
+                return {alarmText: 'Yellow. 4'};
+              } else if (id === '00BA') { // Orange
+                console.log("  Tank/Healer. Orange. A");
+                return {alarmText: 'Orange. A'};
+              } else if (id === '00BB') { // Blue
+                console.log("  Tank/Healer. Blue. 3");
+                return {alarmText: 'Blue. 3'};
+              }
+            }
+            // DPS
+            else {
+              console.log("  Warning: not implemented");
+            }
+          }
+        }
       },
     ]
   }
