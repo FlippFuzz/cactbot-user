@@ -2314,8 +2314,37 @@ Options.Triggers = [
     // E12S
     zoneId: ZoneId.EdensPromiseEternitySavage,
     timeline: `
+      287.0 "Boss Must Face South"
     `,
     timelineTriggers: [
+      {
+        id: 'E12S Ensure Boss Faces South',
+        regex: /Boss Must Face South/,
+        alarmText: {
+          en: 'Boss Must Face South',
+        }
+      },
+      {
+        id: 'E12S Blade Of Flame 1',
+        regex: /Blade Of Flame 1/,
+        alarmText: {
+          en: '2 Next',
+        }
+      },
+      {
+        id: 'E12S Blade Of Flame 2',
+        regex: /Blade Of Flame 2/,
+        alarmText: {
+          en: '3 Next',
+        }
+      },
+      {
+        id: 'E12S Blade Of Flame 3',
+        regex: /Blade Of Flame 3/,
+        alarmText: {
+          en: '4 Next',
+        }
+      },
     ],
     triggers: [
       {
