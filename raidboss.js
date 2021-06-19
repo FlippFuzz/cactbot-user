@@ -2345,6 +2345,20 @@ Options.Triggers = [
           en: '4 Next',
         }
       },
+      {
+        id: 'E12S Lionsblaze 1',
+        regex: /Lionsblaze 1/,
+        alarmText: {
+          en: 'Arms Length. Big Lion Swap',
+        }
+      },
+      {
+        id: 'E12S Lionsblaze 2',
+        regex: /Lionsblaze 2/,
+        alarmText: {
+          en: 'Cast. Big Lion Swap',
+        }
+      },
     ],
     triggers: [
       {
@@ -2487,6 +2501,48 @@ Options.Triggers = [
             }
           }
         }
+      },
+      {
+        id: 'E12S Promise Palm Of Temperance SE',
+        netRegex: NetRegexes.startsUsing({ source: 'Guardian Of Eden', id: '58B4', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Wächter Von Eden', id: '58B4', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Gardien D\'Éden', id: '58B4', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ガーディアン・オブ・エデン', id: '58B4', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '伊甸守卫', id: '58B4', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '에덴의 수호자', id: '58B4', capture: false }),
+        durationSeconds: 10,
+        infoText: (_data, _matches, output) => output.knockback(),
+        outputStrings: {
+          knockback: {
+            en: 'Knockback. Go Left',
+            de: 'SO Rückstoß',
+            fr: 'SE Poussée',
+            ja: '東南ノックバック',
+            cn: '右下（东南）击退',
+            ko: '남동쪽(5시)에서 넉백',
+          },
+        },
+      },
+      {
+        id: 'E12S Promise Palm Of Temperance SW',
+        netRegex: NetRegexes.startsUsing({ source: 'Guardian Of Eden', id: '58B5', capture: false }),
+        netRegexDe: NetRegexes.startsUsing({ source: 'Wächter Von Eden', id: '58B5', capture: false }),
+        netRegexFr: NetRegexes.startsUsing({ source: 'Gardien D\'Éden', id: '58B5', capture: false }),
+        netRegexJa: NetRegexes.startsUsing({ source: 'ガーディアン・オブ・エデン', id: '58B5', capture: false }),
+        netRegexCn: NetRegexes.startsUsing({ source: '伊甸守卫', id: '58B5', capture: false }),
+        netRegexKo: NetRegexes.startsUsing({ source: '에덴의 수호자', id: '58B5', capture: false }),
+        durationSeconds: 10,
+        infoText: (_data, _matches, output) => output.knockback(),
+        outputStrings: {
+          knockback: {
+            en: 'Knockback. Go Right',
+            de: 'SW Rückstoß',
+            fr: 'SO Poussée',
+            ja: '西南ノックバック',
+            cn: '左下（西南）击退',
+            ko: '남서쪽(7시)에서 넉백',
+          },
+        },
       },
     ]
   }
