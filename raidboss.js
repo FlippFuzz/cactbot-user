@@ -2346,17 +2346,10 @@ Options.Triggers = [
         }
       },
       {
-        id: 'E12S Lionsblaze 1',
-        regex: /Lionsblaze 1/,
+        id: 'E12S Blade Of Flame 4',
+        regex: /Blade Of Flame 4/,
         alarmText: {
-          en: 'Arms Length. Big Lion Swap',
-        }
-      },
-      {
-        id: 'E12S Lionsblaze 2',
-        regex: /Lionsblaze 2/,
-        alarmText: {
-          en: 'Cast. Big Lion Swap',
+          en: 'Knockback',
         }
       },
     ],
@@ -2542,6 +2535,30 @@ Options.Triggers = [
             cn: '左下（西南）击退',
             ko: '남서쪽(7시)에서 넉백',
           },
+        },
+      },
+      {
+        id: 'E12S Big Lions',
+        netRegex: NetRegexes.startsUsing({ source: 'Beastly Sculpture', id: '58B9', capture: false }),
+        suppressSeconds: 2,
+        run: (data) => {
+          console.log("E12S Big Lions");
+          
+          delete data.weightTargets;
+          
+          if(data.seenFirstLionBreath) {
+            // 2nd Lions
+            data.seenSecondLionBreath = true;
+            console.log("E12S Big Lions: 2nd lions");
+            return {alarmText: 'Release. Big Lion Swap.'};
+          } else if(data.seenSecondLionBreath) {
+            console.log("E12S Big Lions: 3rd lions");
+          } else {
+            // 1st Lions
+            data.seenFirstLionBreath = true;
+            console.log("E12S Big Lions: 1st lions");
+            return {alarmText: 'Arms Length. Big Lion Swap.'};
+          }
         },
       },
     ]
