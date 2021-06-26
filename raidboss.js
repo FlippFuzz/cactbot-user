@@ -2541,7 +2541,7 @@ Options.Triggers = [
         id: 'E12S Big Lions',
         netRegex: NetRegexes.ability({ source: 'Beastly Sculpture', id: '58B9', capture: false }),
         suppressSeconds: 2,
-        response: function(data, _, output) => {
+        response: (data, matches, output) => {
           console.log("E12S Big Lions");
                     
           if(data.seenFirstLionBreath && !data.seenSecondLionBreath) {
