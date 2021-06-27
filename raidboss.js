@@ -2541,6 +2541,7 @@ Options.Triggers = [
         id: 'E12S Big Lions',
         netRegex: NetRegexes.ability({ source: 'Beastly Sculpture', id: '58B9', capture: false }),
         suppressSeconds: 2,
+		delaySeconds: 1,
         response: (data, matches, output) => {
           console.log("E12S Big Lions");
                     
@@ -2555,7 +2556,7 @@ Options.Triggers = [
             // 1st Lions
             data.seenFirstLionBreath = true;
             console.log("E12S Big Lions: 1st lions");
-            return {alarmText: 'Arms Length. Big Lion Swap. Wait.'};
+            return {alarmText: 'Arms Length. Big Lion Swap. Make Sure To Wait.'};
           }
         },
       },
