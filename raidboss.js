@@ -2315,6 +2315,10 @@ Options.Triggers = [
     zoneId: ZoneId.EdensPromiseEternitySavage,
     timeline: `
       287.0 "Boss Must Face South"
+      1181.4 "Single Apoc. Move to Side"
+      1185.7 "Single Apoc. Move to Middle"
+      1189.1 "Single Apoc. Spread"
+      1195.1 "Single Apoc. Back to Middle"
     `,
     timelineTriggers: [
       {
@@ -2350,6 +2354,34 @@ Options.Triggers = [
         regex: /Blade Of Flame 4/,
         alarmText: {
           en: 'Knockback',
+        }
+      },
+      {
+        id: 'E12S P2 Single Apoc. Move to Side',
+        regex: /Single Apoc. Move to Safe Side/,
+        alarmText: {
+          en: 'Move to Safe Side',
+        }
+      },
+      {
+        id: 'E12S P2 Single Apoc. Move to Middle',
+        regex: /Single Apoc. Move to Middle/,
+        alarmText: {
+          en: 'Stack Middle',
+        }
+      },
+      {
+        id: 'E12S P2 Single Apoc. Spread',
+        regex: /Single Apoc. Spread/,
+        alarmText: {
+          en: 'Spread',
+        }
+      },
+      {
+        id: 'E12S P2 Single Apoc. Back to Middle',
+        regex: /Single Apoc. Back to Middle/,
+        alarmText: {
+          en: 'Back to Middle',
         }
       },
     ],
@@ -2507,7 +2539,7 @@ Options.Triggers = [
         infoText: (_data, _matches, output) => output.knockback(),
         outputStrings: {
           knockback: {
-            en: 'Knockback. Go Left',
+            en: 'Knockback. Go South East. Left',
             de: 'SO Rückstoß',
             fr: 'SE Poussée',
             ja: '東南ノックバック',
@@ -2528,7 +2560,7 @@ Options.Triggers = [
         infoText: (_data, _matches, output) => output.knockback(),
         outputStrings: {
           knockback: {
-            en: 'Knockback. Go Right',
+            en: 'Knockback. Go South West. Right',
             de: 'SW Rückstoß',
             fr: 'SO Poussée',
             ja: '西南ノックバック',
@@ -2541,7 +2573,7 @@ Options.Triggers = [
         id: 'E12S Big Lions',
         netRegex: NetRegexes.ability({ source: 'Beastly Sculpture', id: '58B9', capture: false }),
         suppressSeconds: 2,
-		delaySeconds: 1,
+        delaySeconds: 1,
         response: (data, matches, output) => {
           console.log("E12S Big Lions");
                     
