@@ -2728,7 +2728,7 @@ Options.Triggers.push({
           },
       },
       {
-          id: 'ZodiarkEx Algedon Boss Fists',
+          id: 'ZodiarkEx Adikia Boss Fists',
           type: 'StartsUsing',
           netRegex: NetRegexes.startsUsing({ id: '67F1', source: 'Zodiark', capture: false }),
           alarmText: {
