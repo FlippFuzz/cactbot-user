@@ -2682,37 +2682,37 @@ Options.Triggers.push(
 
 Options.Triggers.push({
     zoneId: ZoneId.TheMinstrelsBalladZodiarksFall,
-	timeline: `
-	  55.0 "2x Sigil"
-	  78.0 "Animals+Boss Charge"
-	  112.0 "Sigil+Rotating Snakes"
-	  152.0 "Boss Fists+Snakes"
-	  
-	  372.0 "3x Sigils Rays"
-	  385.0 "Animals+Line"
-	  430.0 "Sigils+Boss Charge"
-	  455.0 "Snakes+Animals+Line"
-	  501.0 "3x Sigils, then boss fists"
-	  
-	  583.0 "Sigil+Rotating Snakes+Line"
-	  634.0 "3x Sigil+Sigils Rays"
-	  654.0 "Sigil+Animals+Line"
-	  710.0 "3x Sigils, then boss fists"
-	  746.0 "Sigil+Rotating Snake+Animals+Line"
+    timeline: `
+      55.0 "2x Sigil"
+      78.0 "Animals+Boss Charge"
+      112.0 "Sigil+Rotating Snakes"
+      152.0 "Boss Fists+Snakes"
+      
+      372.0 "3x Sigils Rays"
+      385.0 "Animals+Line"
+      430.0 "Sigils+Boss Charge"
+      455.0 "Snakes+Animals+Line"
+      501.0 "3x Sigils, then boss fists"
+      
+      583.0 "Sigil+Rotating Snakes+Line"
+      634.0 "3x Sigil+Sigils Rays"
+      654.0 "Sigil+Animals+Line"
+      710.0 "3x Sigils, then boss fists"
+      746.0 "Sigil+Rotating Snake+Animals+Line"
     `,
     timelineReplace: [
-	  {
+      {
         'locale': 'en',
         'replaceText': {
           'Kokytos': 'Kokytos-1hp',
-		  'Paradeigma': 'Paradeigma-Summon Animals',
-		  'Keraunos Eidolon': 'Keraunos Eidolon',
-		  'Ania': 'Ania-Tank Buster',
-		  'Algedon' : 'Algedon-Boss Charge',
-		  'Adikia' : 'Adikia-Boss Fists',
-		  'Phobos' : 'Phobos-AoE',
-		  'Astral Flow' : 'Astral Flow-Rotate',
-		  'Astral Eclipse' : 'Astral Eclipse-Stars'
+          'Paradeigma': 'Paradeigma-Summon Animals',
+          'Keraunos Eidolon': 'Keraunos Eidolon',
+          'Ania': 'Ania-Tank Buster',
+          'Algedon' : 'Algedon-Boss Charge',
+          'Adikia' : 'Adikia-Boss Fists',
+          'Phobos' : 'Phobos-AoE',
+          'Astral Flow' : 'Astral Flow-Rotate',
+          'Astral Eclipse' : 'Astral Eclipse-Stars'
         },
       },
     ],
@@ -2724,16 +2724,16 @@ Options.Triggers.push({
           type: 'StartsUsing',
           netRegex: NetRegexes.startsUsing({ id: '67E[CD]', source: 'Zodiark', capture: false }),
           alarmText: {
-			en: 'Boss Charge'
-		  },
+            en: 'Boss Charge'
+          },
       },
       {
           id: 'ZodiarkEx Algedon Boss Fists',
           type: 'StartsUsing',
           netRegex: NetRegexes.startsUsing({ id: '67F1', source: 'Zodiark', capture: false }),
           alarmText: {
-			en: 'Boss Fists'
-		  },
+            en: 'Boss Fists'
+          },
       },
     ],
 });
