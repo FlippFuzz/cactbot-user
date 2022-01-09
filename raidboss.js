@@ -2741,6 +2741,11 @@ Options.Triggers.push({
 Options.Triggers.push({
     zoneId: ZoneId.AsphodelosTheFirstCircleSavage,
     timeline: `
+      66.0 "Tank Swap Soon"
+      161.0 "Tank Swap Soon"
+      218.0 "Tank Swap Soon"
+      419.0 "Tank Swap Soon"
+      1056.0 "Tank Swap Soon"
     `,
     timelineReplace: [
         {
@@ -2753,6 +2758,16 @@ Options.Triggers.push({
         },
     ],
     timelineTriggers: [
+        {
+            id: 'P1S Tank Swap Soon',
+            regex: /Tank Swap Soon/,
+            condition: function(data, matches) {
+                return data.role == 'tank';
+            },
+            alarmText: {
+              en: 'Tank Swap Soon',
+            }
+        },
     ],
     triggers: [
         {
