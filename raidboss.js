@@ -2741,11 +2741,11 @@ Options.Triggers.push({
 Options.Triggers.push({
     zoneId: ZoneId.AsphodelosTheFirstCircleSavage,
     timeline: `
-      66.0 "Tank Swap Soon"
-      161.0 "Tank Swap Soon"
-      218.0 "Tank Swap Soon"
-      419.0 "Tank Swap Soon"
-      1056.0 "Tank Swap Soon"
+      64.0 "Tank Swap Soon"
+      159.0 "Tank Swap Soon"
+      216.0 "Tank Swap Soon"
+      418.5 "Tank Swap Soon"
+      1054.0 "Tank Swap Soon"
     `,
     timelineReplace: [
         {
@@ -2924,3 +2924,43 @@ Options.Triggers.push({
         },
     ],
 });
+
+// P2S
+Options.Triggers.push({
+    zoneId: ZoneId.AsphodelosTheSecondCircleSavage,
+    timeline: `
+    `,
+    timelineReplace: [
+    ],
+    timelineTriggers: [
+    ],
+    triggers: [
+    ],
+});
+
+// P3S
+Options.Triggers.push({
+    zoneId: ZoneId.AsphodelosTheThirdCircleSavage,
+    timeline: `
+    `,
+    timelineReplace: [
+    ],
+    timelineTriggers: [
+    ],
+    triggers: [
+    ],
+});
+
+// P4S
+Options.Triggers.push({
+    zoneId: ZoneId.AsphodelosTheFourthCircleSavage,
+    timeline: `
+    `,
+    timelineReplace: [
+    ],
+    timelineTriggers: [
+    ],
+    triggers: [
+    ],
+});
+
