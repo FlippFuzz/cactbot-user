@@ -2894,7 +2894,7 @@ Options.Triggers.push({
             id: 'P1S Gaoler\'s Flail Left',
             type: 'StartsUsing',
             netRegex: NetRegexes.startsUsing({ id: ['6DA6', '6DAA'], source: 'Erichthonios', capture: false }),
-            alertText: {
+            alarmText: {
                 en: 'Left',
             },
         },
@@ -2902,7 +2902,7 @@ Options.Triggers.push({
             id: 'P1S Gaoler\'s Flail Right',
             type: 'StartsUsing',
             netRegex: NetRegexes.startsUsing({ id: ['6DA7', '6DAB'], source: 'Erichthonios', capture: false }),
-            alertText: {
+            alarmText: {
                 en: 'Right',
             },
         },
@@ -2910,7 +2910,7 @@ Options.Triggers.push({
             id: 'P1S Gaoler\'s Flail Out',
             type: 'StartsUsing',
             netRegex: NetRegexes.startsUsing({ id: ['6DA8', '6DAC'], source: 'Erichthonios', capture: false }),
-            alertText: {
+            alarmText: {
                 en: 'Out',
             },
         },
@@ -2918,7 +2918,7 @@ Options.Triggers.push({
             id: 'P1S Gaoler\'s Flail In',
             type: 'StartsUsing',
             netRegex: NetRegexes.startsUsing({ id: ['6DA9', '6DAD'], source: 'Erichthonios', capture: false }),
-            alertText: {
+            alarmText: {
                 en: 'In',
             },
         },
@@ -2929,10 +2929,96 @@ Options.Triggers.push({
 Options.Triggers.push({
     zoneId: ZoneId.AsphodelosTheSecondCircleSavage,
     timeline: `
+      134.5 "Predatory Avarice"
+      225.0 "Limit Cut"
+      298.0 "Channeling Overflow 1"
+      358.0 "Predatory Avarice 2"
+      408.0 "Sewage Eruption"
+      430.0 "Coherence Flare and Line"
+      480.0 "Channeling Overflow 2"
+      539.0 "Sewage Eruption"
+      20.0 "Doubled Impact Soon"
+      195.0 "Doubled Impact Soon"
+      275.0 "Doubled Impact Soon"
+      445.0 "Doubled Impact Soon"
+      580.0 "Doubled Impact Soon"
     `,
     timelineReplace: [
+        {
+            'locale': 'en',
+            'replaceText': {
+                'Murky Depths': 'Murky Depths AoE',
+                'Sewage Deluge': 'Sewage Deluge Big AoE',
+                'Coherence': 'Coherence Tether + Line Stack',
+                'Ominous Bubbles': 'Ominous Bubbles Healer Groups',
+                'Predatory Avarice': 'Ominous Bubbles Marked Spread',
+                'Kampeos Harma': 'Kampeos Harma Limit Cut',
+                'Tainted Flood': 'Tainted Flood Spread',
+                'Channeling Flow': 'Channeling Flow Arrows',
+                'Channeling Overflow': 'Channeling Overflow Arrows',
+            },
+        },
     ],
     timelineTriggers: [
+        {
+            id: 'P2S Predatory Avarice',
+            regex: /Predatory Avarice/,
+            infoText: {
+              en: 'Next: Predatory Avarice - Check debuff',
+            }
+        },
+        {
+            id: 'P2S Limit Cut',
+            regex: /Limit Cut/,
+            infoText: {
+              en: 'Next: Limit Cut',
+            }
+        },
+        {
+            id: 'P2S Channeling Overflow 1',
+            regex: /Channeling Overflow 1/,
+            infoText: {
+              en: 'Next: Channeling Overflow 1',
+            }
+        },
+        {
+            id: 'P2S Predatory Avarice 2',
+            regex: /Predatory Avarice 2/,
+            infoText: {
+              en: 'Next: Predatory Avarice 2 - - Check debuff',
+            }
+        },
+        {
+            id: 'P2S Sewage Eruption',
+            regex: /Sewage Eruption/,
+            infoText: {
+              en: 'Next: Sewage Eruption',
+            }
+        },
+        {
+            id: 'P2S Coherence Flare and Line',
+            regex: /Coherence Flare and Line/,
+            infoText: {
+              en: 'Next: Coherence Flare and Line',
+            }
+        },
+        {
+            id: 'P2S Channeling Overflow 2',
+            regex: /Channeling Overflow 2/,
+            infoText: {
+              en: 'Next: Channeling Overflow 2',
+            }
+        },
+        {
+            id: 'P2S Doubled Impact Soon',
+            regex: /Doubled Impact Soon/,
+            condition: function(data, matches) {
+                return data.role == 'tank';
+            },
+            infoText: {
+              en: 'Shared Tank Buster Soon',
+            }
+        },
     ],
     triggers: [
     ],
@@ -2942,12 +3028,71 @@ Options.Triggers.push({
 Options.Triggers.push({
     zoneId: ZoneId.AsphodelosTheThirdCircleSavage,
     timeline: `
+      44.0 "Center Boss. Fire Position"
+      595.0 "Center Boss"
     `,
     timelineReplace: [
+        {
+            'locale': 'en',
+            'replaceText': {
+                'Heat of Condemnation': 'Heat of Condemnation TB',
+            },
+        },
     ],
     timelineTriggers: [
+        {
+            id: 'P3S Center Boss. Fire Position',
+            regex: /Center Boss. Fire Position/,
+            infoText: {
+              en: 'Center Boss. Fire Position',
+            }
+        },
+        {
+            id: 'P3S Move Boss North',
+            regex: /Move Boss North/,
+            infoText: {
+              en: 'Move Boss North',
+            }
+        },
     ],
     triggers: [
+        {
+            id: 'P3S Bright Fire Marker and Fledgling Flights',
+            type: 'HeadMarker',
+            netRegex: NetRegexes.headMarker({}),
+            condition: Conditions.targetIsYou(),
+            alertText: (data, matches, output) => {
+                const id = getHeadmarkerId(data, matches);
+                return {
+                    '004F': output.num1(),
+                    '0050': output.num2(),
+                    '0051': output.num3(),
+                    '0052': output.num4(),
+                    '0053': output.num5(),
+                    '0054': output.num6(),
+                    '0055': output.num7(),
+                    '0056': output.num8(),
+                    '006B': data.deathsToll ? output.west() : output.east(),
+                    '006C': data.deathsToll ? output.east() : output.west(),
+                    '006D': data.deathsToll ? output.north() : output.south(),
+                    '006E': data.deathsToll ? output.south() : output.north(),
+                }[id];
+            },
+            outputStrings: {
+                num1: "1",
+                num2: "2",
+                num3: "3",
+                num4: "4",
+                num5: "1",
+                num6: "2",
+                num7: "3",
+                num8: "4",
+                east: "East",
+                west: "West",
+                south: "South",
+                north: "North",
+            },
+        },
     ],
 });
 
