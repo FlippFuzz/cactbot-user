@@ -3047,15 +3047,56 @@ Options.Triggers.push({
               en: 'Center Boss. Fire Position',
             }
         },
-        {
+        /*{
             id: 'P3S Move Boss North',
             regex: /Move Boss North/,
             infoText: {
               en: 'Move Boss North',
             }
-        },
+        },*/
     ],
     triggers: [
+        {
+            id: 'P3S Bright Fire Marker and Fledgling Flights',
+            type: 'HeadMarker',
+            netRegex: NetRegexes.headMarker({}),
+            condition: Conditions.targetIsYou(),
+            alertText: (data, matches, output) => {
+                if (typeof data.decOffset === 'undefined')
+                    data.decOffset = parseInt(matches.id, 16) - parseInt('004F', 16);
+                const id = (parseInt(matches.id, 16) - data.decOffset).toString(16).toUpperCase().padStart(4, '0');
+            
+                console.log("P3S " + id);
+                return {
+                    '004F': output.num1(),
+                    '0050': output.num2(),
+                    '0051': output.num3(),
+                    '0052': output.num4(),
+                    '0053': output.num5(),
+                    '0054': output.num6(),
+                    '0055': output.num7(),
+                    '0056': output.num8(),
+                    '006B': data.deathsToll ? output.west() : output.east(),
+                    '006C': data.deathsToll ? output.east() : output.west(),
+                    '006D': data.deathsToll ? output.north() : output.south(),
+                    '006E': data.deathsToll ? output.south() : output.north(),
+                }[id];
+            },
+            outputStrings: {
+                num1: "1",
+                num2: "2",
+                num3: "3",
+                num4: "4",
+                num5: "1",
+                num6: "2",
+                num7: "3",
+                num8: "4",
+                east: "East",
+                west: "West",
+                south: "South",
+                north: "North",
+            },
+        },
         {
             id: 'P3S Right Cinderwing',
             type: 'StartsUsing',
@@ -3077,7 +3118,7 @@ Options.Triggers.push({
             alertText: {
               en: 'Left (Facing Boss)',
             }        
-		},
+        },
     ],
 });
 
