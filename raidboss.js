@@ -3066,7 +3066,7 @@ Options.Triggers.push({
                     data.decOffset = parseInt(matches.id, 16) - parseInt('004F', 16);
                 const id = (parseInt(matches.id, 16) - data.decOffset).toString(16).toUpperCase().padStart(4, '0');
             
-                console.log("P3S " + id);
+                // console.log("P3S " + id);
                 return {
                     '004F': output.num1(),
                     '0050': output.num2(),
