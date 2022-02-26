@@ -3029,7 +3029,12 @@ Options.Triggers.push({
     zoneId: ZoneId.AsphodelosTheThirdCircleSavage,
     timeline: `
       44.0 "Center Boss. Fire Position"
-      595.0 "Center Boss"
+      14.8 "Tether Next"
+      88.5 "Tether Next"
+      141.5 "Tether Next"
+      528.4 "Tether Next"
+      592.0 "Center Boss"
+      647.6 "Tether Next"
     `,
     timelineReplace: [
         {
@@ -3045,6 +3050,20 @@ Options.Triggers.push({
             regex: /Center Boss. Fire Position/,
             infoText: {
               en: 'Center Boss. Fire Position',
+            }
+        },
+        {
+            id: 'P3S Center Boss',
+            regex: /Center Boss/,
+            infoText: {
+              en: 'Center Boss.',
+            }
+        },
+        {
+            id: 'P3S Tether Next',
+            regex: /Tether Next/,
+            infoText: {
+              en: 'Tether Next.',
             }
         },
         /*{
@@ -3118,6 +3137,84 @@ Options.Triggers.push({
             alertText: {
               en: 'Left (Facing Boss)',
             }        
+        },
+        {
+            id: 'P3S Sunbird Tether',
+            type: 'Tether',
+            // There is no need for a delay here, because all of the tethers are ordered:
+            //   SunbirdA => Player1
+            //   Player1 => Player2
+            //   SunbirdB => Player3
+            //   Player3 => Player4
+            // ...therefore if this tether has the current player as a target, then we
+            // will have seen the Sunbird => Player tether previously if it exists in the
+            // Sunbird Tether Collector line.
+            netRegex: NetRegexes.tether({ id: ['0039', '0001'] }),
+            condition: Conditions.targetIsYou(),
+            // There are additional tether lines when you stretch/unstretch the tether, and
+            // adds will re-tether somebody new if somebody dies right before dashing.  Only call once.
+            suppressSeconds: 9999,
+            durationSeconds: 10,
+            alertText: (data, matches, output) => {
+                let _a;
+                const myTether = matches;
+                const parentTether = data.sunbirdTethers.find((x) => x.targetId === myTether.sourceId);
+                const birdId = (_a = parentTether === null || parentTether === void 0 ? void 0 : parentTether.sourceId) !== null && _a !== void 0 ? _a : myTether.sourceId;
+                const bird = data.sunbirds.find((x) => x.id === birdId);
+                if (!bird) {
+                    // Note: 0001 tethers happen later with the Sunshadow birds during the Fountain of Fire
+                    // section.  In most cases, a player will get a tether during add phase and then this
+                    // will be suppressed in the fountain section.  In the rare case they don't, they
+                    // may get this error, but nothing will be printed on screen.
+                    console.error(`SunbirdTether: no bird ${birdId}`);
+                    return;
+                }
+                const centerX = 100;
+                const centerY = 100;
+                const x = parseFloat(bird.x) - centerX;
+                const y = parseFloat(bird.y) - centerY;
+                const birdDir = Math.round(4 - 4 * Math.atan2(x, y) / Math.PI) % 8;
+                const adjustedDir = (birdDir + (parentTether === undefined ? 4 : 0)) % 8;
+                const outputDir = {
+                    0: output.north(),
+                    1: output.northeast(),
+                    2: output.east(),
+                    3: output.southeast(),
+                    4: output.south(),
+                    5: output.southwest(),
+                    6: output.west(),
+                    7: output.northwest(),
+                }[adjustedDir];
+                if (!outputDir)
+                    throw new UnreachableCode();
+                if (parentTether)
+                    return output.playerTether({ dir: outputDir, player: data.ShortName(myTether.source) });
+                return output.birdTether({ dir: outputDir });
+            },
+            outputStrings: {
+                playerTether: {
+                    en: '${dir} Right (away from ${player})',
+                    de: '${dir} Right (weg von ${player})',
+                    fr: '${dir} Right (éloignez-vous de ${player})',
+                    ja: '${dir} Right (${player}と繋がる)',
+                    ko: '${dir} Right (연결: ${player})',
+                },
+                birdTether: {
+                    en: '${dir} Left (away from bird)',
+                    de: '${dir} Left (weg vom Vogel)',
+                    fr: '${dir} Left (éloignez-vous de l\'oiseau)',
+                    ja: '${dir} Left (鳥と繋がる)',
+                    ko: '${dir} Left (새와 연결)',
+                },
+                north: "North",
+                northeast: "North East",
+                east: "East",
+                southeast: "South East",
+                south: "South",
+                southwest: "South West",
+                west: "West",
+                northwest: "North West",
+            },
         },
     ],
 });
